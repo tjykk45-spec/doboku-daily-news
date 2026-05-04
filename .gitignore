@@ -1,0 +1,21 @@
+.env
+.env.local
+.env.*.local
+# プロジェクト固有の別名（誤ってコミットしないよう）
+Daily-News.env
+scripts/watchlist.txt
+clips/.cache/
+clips/log/_job-*.log
+
+clips/projects/*
+!clips/projects/README.md
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+
+# バックアップ・作業ファイル
+index_backup.html
+scripts/_poc_body_sample.txt

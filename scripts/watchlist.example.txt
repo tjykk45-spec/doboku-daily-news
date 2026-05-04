@@ -1,0 +1,6 @@
+# コピーして watchlist.txt にリネームして使う（watchlist.txt は .gitignore 推奨）
+# 先頭の非コメント行だけが 1 回の --ingest で処理され、成功するとその行は削除される。
+# 区切りは TAB。日付は YYYY-MM-DD 必須。3列目は任意（ページタイトルより優先する見出し）
+#
+# 例（先頭 # を外して、実際のURLに差し替え）:
+# https://www.mlit.go.jp/report/press/kanbo08_hh_001304.html	2026-02-27
