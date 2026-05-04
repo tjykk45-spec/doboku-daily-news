@@ -2,8 +2,8 @@ name: Daily News
 
 on:
   schedule:
-    # 平日 9:00 JST (= 0:00 UTC)
-    - cron: '0 0 * * 1-5'
+    # 毎日 7:00 JST (= 22:00 UTC 前日)
+    - cron: '0 22 * * *'
   workflow_dispatch:  # 手動実行ボタン
 
 permissions:
