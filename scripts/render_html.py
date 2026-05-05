@@ -24,6 +24,12 @@ WINDOW_DAYS = 14
 
 SECTION_ORDER = ["国交省・規制・政策", "技術・トレンド", "資材価格・コスト"]
 
+_SECTION_ID = {
+    "国交省・規制・政策": "sec-policy",
+    "技術・トレンド": "sec-tech",
+    "資材価格・コスト": "sec-cost",
+}
+
 _SECTION_CFG = {
     "国交省・規制・政策": {
         "num": "SEC.02",
@@ -201,8 +207,10 @@ def _render_section(section_key: str, articles: list[dict]) -> str:
     else:
         cards_html = '\n      <p class="sec-empty">本日は該当記事がありません。</p>'
 
+    sec_id = _SECTION_ID.get(section_key, "")
+    id_attr = f' id="{sec_id}"' if sec_id else ""
     return (
-        f'\n    <section class="sec">\n'
+        f'\n    <section class="sec"{id_attr}>\n'
         f'      <div class="sec-head">\n'
         f'        <div class="label">\n'
         f'          <span class="num">{cfg["num"]}</span>\n'

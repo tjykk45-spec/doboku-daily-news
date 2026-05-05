@@ -51,7 +51,7 @@
         radial-gradient(1200px 600px at 50% -200px, var(--paper-2) 0%, var(--paper) 60%, var(--paper) 100%);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      line-height: 1.7;
+      line-height: 1.5;
     }
 
     .page {
@@ -183,7 +183,7 @@
       font-size: 13px;
       color: var(--ink-3);
       margin: -8px 0 16px;
-      line-height: 1.7;
+      line-height: 1.5;
     }
     .sec-sub strong { color: var(--ink-2); font-weight: 600; }
 
@@ -299,7 +299,7 @@
     .hero p.lead {
       position: relative;
       font-size: 14.5px;
-      line-height: 1.85;
+      line-height: 1.5;
       color: oklch(0.92 0.01 85);
       margin: 0;
     }
@@ -360,7 +360,7 @@
     }
     .card .lead {
       font-size: 14px;
-      line-height: 1.85;
+      line-height: 1.5;
       color: var(--ink-2);
       margin: 0;
     }
@@ -453,7 +453,7 @@
     details.dive .body {
       margin-top: 12px;
       font-size: 13.5px;
-      line-height: 1.85;
+      line-height: 1.5;
       color: var(--ink-2);
     }
     details.dive .body p + p { margin-top: 8px; }
@@ -765,6 +765,42 @@
       margin-right: 8px;
       color: oklch(0.78 0.1 158);
     }
+
+    /* ───────────── TAB NAV ───────────── */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--paper);
+      border-bottom: 2px solid var(--rule);
+      box-shadow: 0 2px 8px oklch(0.15 0.01 158 / 0.06);
+    }
+    .tab-btn {
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1.5px solid var(--rule);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      background: transparent;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover {
+      border-color: var(--accent-edge);
+      color: var(--accent);
+      background: var(--accent-tint);
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -794,6 +830,13 @@
         <!-- DAILY-NEWS:MASTHEAD:END -->
       </div>
     </header>
+
+    <!-- ───────────── TAB NAV ───────────── -->
+    <nav class="tab-nav" aria-label="セクション">
+      <a class="tab-btn active" href="#sec-policy">🏛 国交省・政策</a>
+      <a class="tab-btn" href="#sec-tech">🔧 技術・トレンド</a>
+      <a class="tab-btn" href="#sec-cost">💴 資材・コスト</a>
+    </nav>
 
     <!-- ───────────── 運用方針 ───────────── -->
     <section class="ops-note">
@@ -1461,6 +1504,29 @@
           }
         });
       });
+    })();
+
+    // スクロール連動タブ active 切り替え
+    (function () {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var sectionIds = ['sec-policy', 'sec-tech', 'sec-cost'];
+      var sections = sectionIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      if (!tabs.length || !sections.length) return;
+
+      function setActive(id) {
+        tabs.forEach(function (btn) {
+          btn.classList.toggle('active', btn.getAttribute('href') === '#' + id);
+        });
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+
+      sections.forEach(function (s) { observer.observe(s); });
+      if (sections[0]) setActive(sections[0].id);
     })();
   </script>
 </body>
