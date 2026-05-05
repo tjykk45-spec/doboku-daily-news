@@ -612,34 +612,36 @@
     .ops-note code { font-family: var(--mono); font-size: 11.5px; background: rgba(255,255,255,.6); border: 1px solid var(--note-edge); padding: 1px 5px; border-radius: 3px; }
     .ops-note p + p { margin-top: 6px; }
 
-    /* HERO (今日の一言) */
+    /* HERO (今日の一言) — 薄い緑背景で差別化 */
     .hero {
       position: relative;
-      background: var(--ink);
-      color: var(--paper);
+      background: oklch(0.935 0.030 145);
+      color: var(--ink);
       padding: 28px 24px 24px;
       margin-bottom: 36px;
       border-radius: var(--radius);
+      border: 1px solid var(--green-edge);
+      border-top: 3px solid var(--green);
       overflow: hidden;
     }
-    .hero::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(255,255,255,.12); border-radius: 3px; pointer-events: none; }
-    .hero-kicker { position: relative; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
-    .hero-kicker::before { content: ""; width: 24px; height: 1px; background: var(--green); }
-    .hero h2 { position: relative; font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.45; letter-spacing: .005em; color: #fff; margin: 0 0 14px; }
-    .hero p.lead { position: relative; font-size: 14.5px; line-height: 1.5; color: oklch(0.92 0.01 85); margin: 0; }
+    .hero::before { display: none; }
+    .hero-kicker { position: relative; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--main); margin-bottom: 14px; }
+    .hero-kicker::before { content: ""; width: 24px; height: 1px; background: var(--main); }
+    .hero h2 { position: relative; font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.45; letter-spacing: .005em; color: var(--ink); margin: 0 0 14px; }
+    .hero p.lead { position: relative; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); margin: 0; }
     .hero-tags { position: relative; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .hero-tags .tag { font-family: var(--mono); font-size: 11px; padding: 3px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; color: var(--green-tint); }
+    .hero-tags .tag { font-family: var(--mono); font-size: 11px; padding: 3px 10px; border: 1px solid var(--green-edge); border-radius: 999px; color: var(--green-2); background: var(--green-tint); }
     .hero details { position: relative; }
-    .hero details.dive { border-top-color: rgba(255,255,255,.18); }
-    .hero details.dive[open] { border-top-color: rgba(255,255,255,.4); }
-    .hero details.dive summary { color: var(--green); }
-    .hero details.dive summary:hover { color: #fff; }
-    .hero details.dive summary::after { color: oklch(0.7 0.04 158); }
-    .hero details.dive .body { color: oklch(0.92 0.01 85); }
-    .hero .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
-    .hero .btn-primary:hover { background: var(--green-tint); }
-    .hero .btn-ghost { background: transparent; color: var(--green-tint); border-color: rgba(255,255,255,.4); }
-    .hero .btn-ghost:hover { background: rgba(255,255,255,.08); color: #fff; border-color: #fff; }
+    .hero details.dive { border-top-color: var(--green-edge); }
+    .hero details.dive[open] { border-top-color: var(--green); }
+    .hero details.dive summary { color: var(--main); }
+    .hero details.dive summary:hover { color: var(--main-2); }
+    .hero details.dive summary::after { color: var(--ink-mute); }
+    .hero details.dive .body { color: var(--ink-2); }
+    .hero .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--green-edge); }
+    .hero .btn-primary:hover { background: var(--green-tint); border-color: var(--green); color: var(--green-2); }
+    .hero .btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--rule); }
+    .hero .btn-ghost:hover { background: var(--paper-2); color: var(--ink); border-color: var(--ink-mute); }
 
     /* FEATURE CARD (深掘り枠) */
     .feature { border: 1px solid var(--rule-strong); border-top: 3px solid var(--main); padding: 24px 24px 20px; background: var(--paper); }
