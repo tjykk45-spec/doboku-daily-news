@@ -27,7 +27,9 @@ function Invoke-DailyStep {
         [string[]]$Arguments = @()
     )
     $scriptPath = Join-Path $ProjectRoot $RelativeScript
-    & $py $scriptPath @Arguments
+    # $null に代入して stdout をパイプラインに流さない。
+    # 流すと $r3 が配列になり「-ne 0」が常に truthy になってしまう。
+    $null = & $py $scriptPath @Arguments
     return $LASTEXITCODE
 }
 

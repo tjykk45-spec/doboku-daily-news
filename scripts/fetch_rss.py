@@ -12,6 +12,7 @@ scripts/watchlist.txt にTAB区切りで追記する。
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from datetime import date, datetime
 from email.utils import parsedate_to_datetime
@@ -79,16 +80,27 @@ def _append_job_log(d: date, message: str) -> None:
 # ---------------------------------------------------------------------------
 
 def _load_existing_urls(watchlist: Path) -> set[str]:
-    if not watchlist.is_file():
-        return set()
     urls: set[str] = set()
-    for line in watchlist.read_text(encoding="utf-8", errors="replace").splitlines():
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-        url = stripped.split("\t")[0].strip()
-        if url.startswith("http"):
-            urls.add(url)
+    if watchlist.is_file():
+        for line in watchlist.read_text(encoding="utf-8", errors="replace").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                continue
+            url = stripped.split("\t")[0].strip()
+            if url.startswith("http"):
+                urls.add(url)
+    # GitHub Actions では watchlist.txt がリセットされるため、
+    # clips/data/*.json の処理済み URL も重複チェック対象に含める
+    data_dir = PROJECT_ROOT / "clips" / "data"
+    if data_dir.is_dir():
+        for p in data_dir.glob("*.json"):
+            try:
+                data = json.loads(p.read_text(encoding="utf-8"))
+                url = data.get("url", "")
+                if url:
+                    urls.add(url)
+            except Exception:
+                continue
     return urls
 
 

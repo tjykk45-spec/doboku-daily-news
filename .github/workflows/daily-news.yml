@@ -1,0 +1,45 @@
+name: 土木 Daily News
+
+on:
+  schedule:
+    - cron: '30 22 * * *'  # 毎日 07:30 JST（UTC 22:30 = JST 翌 07:30）
+  workflow_dispatch:       # 手動実行ボタン
+
+permissions:
+  contents: write          # index.html / clips/data/ のコミット書き戻しに必要
+
+jobs:
+  daily-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: RSS取得・watchlist更新
+        run: python scripts/fetch_rss.py
+
+      - name: 記事要約（Gemini）
+        run: python scripts/daily_run.py --ingest-all
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONUTF8: '1'
+
+      - name: index.html 生成
+        run: python scripts/render_html.py
+
+      - name: 変更をコミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add clips/data/ clips/log/ index.html
+          git diff --staged --quiet || git commit -m "chore: 土木 Daily News 自動更新 $(date -u '+%Y-%m-%d')"
+          git push
