@@ -766,6 +766,53 @@
       color: oklch(0.78 0.1 158);
     }
 
+    /* ───────────── BADGES ───────────── */
+    .badge-new {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: var(--accent);
+      color: #fff;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .badge-maturity {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--rule);
+      color: var(--ink-3);
+      background: var(--paper-2);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .badge-maturity[data-maturity="確定"] {
+      background: var(--accent-tint);
+      border-color: var(--accent-edge);
+      color: var(--accent);
+    }
+    .badge-scope-out {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px dashed var(--rule);
+      color: var(--ink-mute);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
     /* ───────────── TAB NAV ───────────── */
     .tab-nav {
       position: sticky;
@@ -1426,8 +1473,8 @@
       <div class="colophon-grid">
         <div>
           <h4>Next Update ／ 次回更新</h4>
-          <p>毎朝 6:30 タスクスケジューラ起動</p>
-          <p style="color: var(--ink-mute); font-size: 12px;">RSS 取得 → Gemini 要約 → render_html.py</p>
+          <p>毎朝 7:00 GitHub Actions 自動実行</p>
+          <p style="color: var(--ink-mute); font-size: 12px;">RSS 取得 → Gemini 要約 → index.html 自動生成</p>
         </div>
         <div>
           <h4>Sources ／ 参照ソース（予定）</h4>
@@ -1436,7 +1483,7 @@
         <div style="grid-column: 1 / -1;">
           <h4>Filing ／ 後追いの置き場所</h4>
           <p style="font-size: 12.5px;">
-            このリポジトリ内の <code>clips/inbox.md</code>、月次ログ案の <code>clips/log/</code>、または <code>clips/projects/</code> へ。「後追い用にコピー」で Markdown 一塊が入ります（詳細は <code>clips/README.md</code>）。
+            GitHub 上で <code>clips/inbox.md</code> や <code>clips/projects/</code> を直接編集（Web UI → ✏️ ボタン）するか、PC でリポジトリを clone して編集後 push してください。<code>clips/log/</code> は GitHub Actions が自動追記します（手動編集不要）。「後追い用にコピー」で Markdown 一塊が生成されます。
           </p>
         </div>
       </div>

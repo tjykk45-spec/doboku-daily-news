@@ -21,6 +21,7 @@ DATA_DIR = PROJECT_ROOT / "clips" / "data"
 INDEX_HTML = PROJECT_ROOT / "index.html"
 
 WINDOW_DAYS = 14
+NEW_DAYS = 2  # 直近 2 日以内の記事に NEW バッジを表示
 
 SECTION_ORDER = ["国交省・規制・政策", "技術・トレンド", "資材価格・コスト"]
 
@@ -133,6 +134,14 @@ def _render_card(art: dict, cat: str) -> str:
 
     date_display = art_date.replace("-", ".") if art_date else ""
 
+    # NEW バッジ（直近 NEW_DAYS 日以内）
+    try:
+        art_date_obj = date.fromisoformat(art_date) if art_date else None
+    except ValueError:
+        art_date_obj = None
+    is_new = bool(art_date_obj and (date.today() - art_date_obj).days <= NEW_DAYS)
+    new_html = ' <span class="badge-new">NEW</span>' if is_new else ""
+
     # maturity バッジ
     maturity_html = (
         f' <span class="badge-maturity" data-maturity="{_e(maturity)}">{_t(maturity)}</span>'
@@ -173,7 +182,7 @@ def _render_card(art: dict, cat: str) -> str:
         f'          <span class="cat">{_t(cat)}</span>\n'
         f'          <span>·</span>\n'
         f'          <span class="date">{_t(date_display)}</span>'
-        f'{maturity_html}{scope_html}\n'
+        f'{new_html}{maturity_html}{scope_html}\n'
         f'        </div>\n'
         f'        <h3>{_t(title)}</h3>\n'
         f'        <p class="lead">{_t(lead)}</p>'
