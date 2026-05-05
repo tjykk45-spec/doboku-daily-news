@@ -31,6 +31,12 @@ _SECTION_ID = {
     "資材価格・コスト": "sec-cost",
 }
 
+_SECTION_THEME = {
+    "国交省・規制・政策": "green",
+    "技術・トレンド": "main",
+    "資材価格・コスト": "pink",
+}
+
 _SECTION_CFG = {
     "国交省・規制・政策": {
         "num": "SEC.02",
@@ -218,8 +224,10 @@ def _render_section(section_key: str, articles: list[dict]) -> str:
 
     sec_id = _SECTION_ID.get(section_key, "")
     id_attr = f' id="{sec_id}"' if sec_id else ""
+    theme = _SECTION_THEME.get(section_key, "")
+    theme_attr = f' data-theme="{theme}"' if theme else ""
     return (
-        f'\n    <section class="sec"{id_attr}>\n'
+        f'\n    <section class="sec"{id_attr}{theme_attr}>\n'
         f'      <div class="sec-head">\n'
         f'        <div class="label">\n'
         f'          <span class="num">{cfg["num"]}</span>\n'

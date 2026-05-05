@@ -3,43 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土木 Daily News — Design Preview</title>
+  <title>土木 Daily News — Design Preview v2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    /*
+      ────────────────────────────────────────────────────────────
+      COLOR SYSTEM — 60/30/10 across the color wheel
+      ────────────────────────────────────────────────────────────
+      ベース 60%  : 薄い緑   (hue 145)  — paper / surfaces
+      メイン 30%  : 紫青     (hue 278)  — ink / structure
+      アクセント 10% : ピンク (hue 350)  — highlights / CTA hover
+
+      All tones kept LIGHT and LOW-CHROMA so text contrast stays high.
+      3 themes assign one of the three hues as the section accent.
+    */
     :root {
-      /* paper & ink */
-      --paper:        oklch(0.985 0.004 85);
-      --paper-2:      oklch(0.965 0.006 85);
-      --paper-edge:   oklch(0.92 0.008 85);
-      --rule:         oklch(0.86 0.01 85);
-      --rule-strong:  oklch(0.32 0.02 250);
+      /* ── 60% : base green tint (paper) ── */
+      --paper:        oklch(0.985 0.012 145);   /* very pale green-white */
+      --paper-2:      oklch(0.965 0.018 145);   /* slightly deeper */
+      --paper-3:      oklch(0.945 0.024 145);   /* card hover / wash */
+      --paper-edge:   oklch(0.90  0.022 145);
 
-      --ink:          oklch(0.22 0.025 250);
-      --ink-2:        oklch(0.38 0.02 250);
-      --ink-3:        oklch(0.55 0.015 250);
-      --ink-mute:     oklch(0.68 0.012 250);
+      --rule:         oklch(0.88  0.018 145);
+      --rule-strong:  oklch(0.74  0.020 145);
 
-      /* single editorial accent: deep forest */
-      --accent:       oklch(0.42 0.08 158);
-      --accent-2:     oklch(0.32 0.07 158);
-      --accent-tint:  oklch(0.96 0.02 158);
-      --accent-edge:  oklch(0.86 0.04 158);
+      /* ── 30% : main violet-blue (ink) ── */
+      --ink:          oklch(0.30  0.060 278);   /* high-contrast text */
+      --ink-2:        oklch(0.42  0.055 278);
+      --ink-3:        oklch(0.55  0.040 278);
+      --ink-mute:     oklch(0.68  0.030 278);
 
-      /* annotation tint (used sparingly for the "運用メモ") */
-      --note:         oklch(0.95 0.03 85);
-      --note-edge:    oklch(0.85 0.05 85);
-      --note-ink:     oklch(0.32 0.06 70);
+      --main:         oklch(0.55  0.110 278);   /* purple-blue accent */
+      --main-2:       oklch(0.45  0.110 278);
+      --main-tint:    oklch(0.96  0.025 278);
+      --main-edge:    oklch(0.86  0.045 278);
 
-      --shadow-sm: 0 1px 0 oklch(0.86 0.01 85);
-      --shadow-md: 0 1px 2px rgba(20,25,35,.04), 0 4px 14px rgba(20,25,35,.04);
+      /* ── 10% : pink accent ── */
+      --pink:         oklch(0.65  0.110 350);
+      --pink-2:       oklch(0.55  0.110 350);
+      --pink-tint:    oklch(0.96  0.030 350);
+      --pink-edge:    oklch(0.86  0.050 350);
+
+      /* echo green as its own theme accent */
+      --green:        oklch(0.55  0.090 150);
+      --green-2:      oklch(0.45  0.090 150);
+      --green-tint:   oklch(0.95  0.030 150);
+      --green-edge:   oklch(0.84  0.050 150);
+
+      /* annotation tint (運用メモ用) */
+      --note:         oklch(0.96 0.020 145);
+      --note-edge:    oklch(0.86 0.030 145);
+      --note-ink:     oklch(0.40 0.060 145);
+
+      --shadow-sm: 0 1px 0 oklch(0.86 0.018 145);
+      --shadow-md: 0 1px 2px oklch(0.30 0.06 278 / .05), 0 4px 14px oklch(0.30 0.06 278 / .05);
 
       --radius: 6px;
 
       --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
       --sans:  "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
       --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* per-section theme override: each section maps --accent etc to its hue */
+    .sec[data-theme="green"] {
+      --accent: var(--green);
+      --accent-2: var(--green-2);
+      --accent-tint: var(--green-tint);
+      --accent-edge: var(--green-edge);
+    }
+    .sec[data-theme="main"] {
+      --accent: var(--main);
+      --accent-2: var(--main-2);
+      --accent-tint: var(--main-tint);
+      --accent-edge: var(--main-edge);
+    }
+    .sec[data-theme="pink"] {
+      --accent: var(--pink);
+      --accent-2: var(--pink-2);
+      --accent-tint: var(--pink-tint);
+      --accent-edge: var(--pink-edge);
+    }
+    /* default page accent (used outside sections) — main violet-blue */
+    :root {
+      --accent:      var(--main);
+      --accent-2:    var(--main-2);
+      --accent-tint: var(--main-tint);
+      --accent-edge: var(--main-edge);
     }
 
     * { box-sizing: border-box; }
@@ -100,7 +152,7 @@
       font-weight: 600;
       font-size: 0.32em;
       letter-spacing: .35em;
-      color: var(--accent);
+      color: var(--main);
       margin-bottom: 8px;
       text-transform: uppercase;
     }
@@ -135,7 +187,7 @@
     .masthead-foot .pill strong {
       font-family: var(--serif);
       font-weight: 700;
-      color: var(--accent);
+      color: var(--pink-2);
     }
     .masthead-foot .sep { color: var(--ink-mute); }
 
@@ -149,6 +201,16 @@
       border-bottom: 1px solid var(--rule-strong);
       padding-bottom: 8px;
       margin-bottom: 18px;
+      position: relative;
+    }
+    .sec-head::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 64px;
+      height: 2px;
+      background: var(--accent);
     }
     .sec-head .label {
       display: flex;
@@ -187,151 +249,32 @@
     }
     .sec-sub strong { color: var(--ink-2); font-weight: 600; }
 
-    /* ───────────── OPS NOTE (運用方針) ───────────── */
-    .ops-note {
-      background: var(--note);
-      border: 1px solid var(--note-edge);
-      border-left: 3px solid var(--note-ink);
-      padding: 16px 18px;
-      margin-bottom: 32px;
-      font-size: 13px;
-      color: var(--note-ink);
-    }
-    .ops-note h2 {
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--note-ink);
-      margin: 0 0 8px;
-    }
-    .ops-note ul {
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.75;
-    }
-    .ops-note li + li { margin-top: 4px; }
-    .ops-note details {
-      margin-top: 10px;
-      border-top: 1px dashed var(--note-edge);
-      padding-top: 10px;
-    }
-    .ops-note details + details { margin-top: 6px; padding-top: 8px; }
-    .ops-note summary {
-      cursor: pointer;
-      font-weight: 600;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .ops-note summary::-webkit-details-marker { display: none; }
-    .ops-note summary::before {
-      content: "+";
-      font-family: var(--mono);
-      width: 14px;
-      display: inline-block;
-      color: var(--note-ink);
-    }
-    .ops-note details[open] summary::before { content: "−"; }
-    .ops-note details > *:not(summary) {
-      margin-top: 8px;
-      font-size: 12.5px;
-      line-height: 1.75;
-    }
-    .ops-note code {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      background: rgba(255,255,255,.6);
-      border: 1px solid var(--note-edge);
-      padding: 1px 5px;
-      border-radius: 3px;
-    }
-    .ops-note p + p { margin-top: 6px; }
-
-    /* ───────────── HERO (今日の一言) ───────────── */
-    .hero {
-      position: relative;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 28px 24px 24px;
-      margin-bottom: 36px;
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 3px;
-      pointer-events: none;
-    }
-    .hero-kicker {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: oklch(0.78 0.06 158);
-      margin-bottom: 14px;
-    }
-    .hero-kicker::before {
-      content: "";
-      width: 24px;
-      height: 1px;
-      background: oklch(0.78 0.06 158);
-    }
-    .hero h2 {
-      position: relative;
-      font-family: var(--serif);
-      font-weight: 700;
-      font-size: clamp(22px, 4.4vw, 28px);
-      line-height: 1.45;
-      letter-spacing: .005em;
-      color: #fff;
-      margin: 0 0 14px;
-    }
-    .hero p.lead {
-      position: relative;
-      font-size: 14.5px;
-      line-height: 1.5;
-      color: oklch(0.92 0.01 85);
-      margin: 0;
-    }
-    .hero-tags {
-      position: relative;
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .hero-tags .tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 10px;
-      border: 1px solid rgba(255,255,255,.25);
-      border-radius: 999px;
-      color: oklch(0.88 0.02 158);
-    }
-    .hero details { position: relative; }
-
     /* ───────────── CARD ───────────── */
     .card {
       background: var(--paper);
       border: 1px solid var(--rule);
       padding: 18px 20px;
       margin-bottom: 14px;
-      transition: border-color .15s ease, box-shadow .2s ease, transform .2s ease;
+      transition: border-color .15s ease, box-shadow .2s ease, transform .2s ease, background .15s ease;
+      position: relative;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      bottom: -1px;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity .15s ease;
     }
     .card:hover {
-      border-color: var(--ink-mute);
+      border-color: var(--accent-edge);
       box-shadow: var(--shadow-md);
+      background: var(--paper);
     }
+    .card:hover::before { opacity: 1; }
     .card .kicker {
       display: flex;
       flex-wrap: wrap;
@@ -365,55 +308,6 @@
       margin: 0;
     }
 
-    /* feature card (深掘り枠) */
-    .feature {
-      border: 1px solid var(--rule-strong);
-      border-top: 3px solid var(--accent);
-      padding: 24px 24px 20px;
-      background: var(--paper);
-    }
-    .feature .feature-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .feature .feature-tag::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-    }
-    .feature h3 {
-      font-size: 22px;
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    /* tech card (横断トピック) */
-    .card.tech .badge-cross {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .14em;
-      color: var(--accent-2);
-      padding: 2px 8px;
-      border: 1px solid var(--accent-edge);
-      background: var(--accent-tint);
-      border-radius: 3px;
-      text-transform: uppercase;
-    }
-
     /* ───────────── DETAILS (深掘り) ───────────── */
     details.dive {
       margin-top: 14px;
@@ -422,7 +316,7 @@
     }
     details.dive[open] {
       border-top-style: solid;
-      border-top-color: var(--rule-strong);
+      border-top-color: var(--accent-edge);
     }
     details.dive summary {
       cursor: pointer;
@@ -463,32 +357,6 @@
       padding-left: 18px;
     }
     details.dive .body ul li + li { margin-top: 3px; }
-    details.dive .body a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent-edge);
-    }
-    details.dive .body a:hover { border-bottom-color: var(--accent); }
-
-    /* hero details override */
-    .hero details.dive {
-      border-top-color: rgba(255,255,255,.18);
-    }
-    .hero details.dive[open] {
-      border-top-color: rgba(255,255,255,.4);
-    }
-    .hero details.dive summary { color: oklch(0.85 0.04 158); }
-    .hero details.dive summary:hover { color: #fff; }
-    .hero details.dive summary::after { color: oklch(0.7 0.04 158); }
-    .hero details.dive .body { color: oklch(0.92 0.01 85); }
-    .hero details.dive .body a {
-      color: oklch(0.85 0.06 158);
-      border-bottom-color: rgba(255,255,255,.3);
-    }
-
-    /* feature details override */
-    .feature details.dive { border-top-color: var(--accent-edge); }
-    .feature details.dive[open] { border-top-color: var(--accent); }
 
     /* ───────────── SOURCE LINE & ACTIONS ───────────── */
     .source-line {
@@ -507,8 +375,9 @@
       content: "";
       width: 4px;
       height: 4px;
-      background: var(--ink-mute);
+      background: var(--accent);
       border-radius: 50%;
+      opacity: .65;
     }
 
     .actions {
@@ -534,18 +403,21 @@
       cursor: pointer;
       text-decoration: none;
       transition: background .15s ease, border-color .15s ease, color .15s ease, transform .08s ease;
-      font-family: inherit;
     }
     .btn:active { transform: translateY(1px); }
     .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .btn svg { flex: none; }
 
     .btn-primary {
-      background: var(--ink);
-      color: var(--paper);
-      border-color: var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--accent-edge);
     }
-    .btn-primary:hover { background: var(--ink-2); border-color: var(--ink-2); }
+    .btn-primary:hover {
+      background: var(--accent-tint);
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
 
     .btn-ghost {
       background: transparent;
@@ -556,128 +428,6 @@
       color: var(--ink);
       border-color: var(--ink-mute);
       background: var(--paper-2);
-    }
-
-    /* hero variants */
-    .hero .btn-primary {
-      background: var(--paper);
-      color: var(--ink);
-      border-color: var(--paper);
-    }
-    .hero .btn-primary:hover { background: oklch(0.92 0.02 158); }
-    .hero .btn-ghost {
-      background: transparent;
-      color: oklch(0.92 0.02 158);
-      border-color: rgba(255,255,255,.4);
-    }
-    .hero .btn-ghost:hover {
-      background: rgba(255,255,255,.08);
-      color: #fff;
-      border-color: #fff;
-    }
-
-    /* feature variant */
-    .feature .btn-primary {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-    .feature .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
-
-    /* ───────────── INDEX CHART ───────────── */
-    .index-card {
-      padding: 22px 22px 18px;
-    }
-    .index-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: 10px;
-      margin-bottom: 16px;
-    }
-    .index-head h3 {
-      font-family: var(--serif);
-      font-size: 16px;
-      font-weight: 700;
-      margin: 0;
-      color: var(--ink);
-    }
-    .index-head .stamp {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--ink-mute);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .chart {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      align-items: end;
-      padding: 6px 0 0;
-    }
-    .bar-col {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 6px;
-      min-width: 0;
-    }
-    .bar-track {
-      position: relative;
-      height: 132px;
-      border-bottom: 1px solid var(--rule-strong);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    .bar-track::before, .bar-track::after {
-      content: "";
-      position: absolute;
-      left: 0; right: 0;
-      height: 0;
-      border-top: 1px dashed var(--rule);
-    }
-    .bar-track::before { top: 33%; }
-    .bar-track::after  { top: 66%; }
-    .bar {
-      width: 70%;
-      max-width: 44px;
-      background: var(--ink);
-      position: relative;
-    }
-    .bar.up   { background: var(--accent); }
-    .bar.flat { background: var(--ink-3); }
-    .bar.down { background: var(--ink-mute); }
-    .bar .val {
-      position: absolute;
-      top: -22px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--ink);
-      white-space: nowrap;
-    }
-    .bar .val.pos { color: var(--accent); }
-    .bar .val.neg { color: oklch(0.45 0.12 25); }
-    .bar-label {
-      text-align: center;
-      font-family: var(--sans);
-      font-size: 11.5px;
-      color: var(--ink-2);
-      font-weight: 500;
-    }
-    .bar-label .unit {
-      display: block;
-      font-family: var(--mono);
-      font-size: 9.5px;
-      color: var(--ink-mute);
-      letter-spacing: .1em;
-      margin-top: 1px;
     }
 
     /* ───────────── FOOTER ───────────── */
@@ -701,7 +451,7 @@
       font-size: 10.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--main);
       font-weight: 600;
       margin: 0 0 6px;
       padding-bottom: 4px;
@@ -718,53 +468,6 @@
       border-radius: 3px;
       color: var(--ink);
     }
-    .tip-box {
-      margin-top: 22px;
-      padding: 12px 14px;
-      background: var(--paper-2);
-      border: 1px solid var(--rule);
-      font-size: 12.5px;
-      color: var(--ink-2);
-      line-height: 1.75;
-    }
-    .tip-box strong {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-right: 6px;
-    }
-
-    /* ───────────── TOAST ───────────── */
-    #toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%) translateY(8px);
-      background: var(--ink);
-      color: var(--paper);
-      padding: 10px 18px;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: .03em;
-      border-radius: 999px;
-      box-shadow: 0 6px 24px rgba(20,25,35,.18);
-      z-index: 50;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s ease, transform .2s ease;
-    }
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    #toast::before {
-      content: "✓";
-      margin-right: 8px;
-      color: oklch(0.78 0.1 158);
-    }
 
     /* ───────────── BADGES ───────────── */
     .badge-new {
@@ -775,8 +478,9 @@
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.05em;
-      background: var(--accent);
-      color: #fff;
+      background: var(--pink-tint);
+      color: var(--pink-2);
+      border: 1px solid var(--pink-edge);
       vertical-align: middle;
       margin-left: 4px;
     }
@@ -797,7 +501,7 @@
     .badge-maturity[data-maturity="確定"] {
       background: var(--accent-tint);
       border-color: var(--accent-edge);
-      color: var(--accent);
+      color: var(--accent-2);
     }
     .badge-scope-out {
       display: inline-flex;
@@ -822,32 +526,161 @@
       flex-wrap: nowrap;
       gap: 6px;
       padding: 10px 20px;
-      background: var(--paper);
-      border-bottom: 2px solid var(--rule);
-      box-shadow: 0 2px 8px oklch(0.15 0.01 158 / 0.06);
+      background: oklch(0.985 0.012 145 / 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: 0 2px 8px oklch(0.30 0.06 278 / 0.05);
+      margin: -28px -20px 28px;
+    }
+    @media (min-width: 640px) {
+      .tab-nav { margin: -40px -32px 32px; padding: 12px 32px; }
     }
     .tab-btn {
-      padding: 7px 18px;
+      padding: 7px 16px;
       border-radius: 20px;
       border: 1.5px solid var(--rule);
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--ink-2);
-      background: transparent;
+      background: var(--paper);
       text-decoration: none;
       white-space: nowrap;
       transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
-    .tab-btn:hover {
-      border-color: var(--accent-edge);
-      color: var(--accent);
-      background: var(--accent-tint);
+    .tab-btn[data-theme="green"]:hover {
+      border-color: var(--green-edge);
+      color: var(--green-2);
+      background: var(--green-tint);
     }
-    .tab-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+    .tab-btn[data-theme="main"]:hover {
+      border-color: var(--main-edge);
+      color: var(--main-2);
+      background: var(--main-tint);
     }
+    .tab-btn[data-theme="pink"]:hover {
+      border-color: var(--pink-edge);
+      color: var(--pink-2);
+      background: var(--pink-tint);
+    }
+    .tab-btn.active[data-theme="green"] {
+      background: var(--green-tint);
+      color: var(--green-2);
+      border-color: var(--green);
+    }
+    .tab-btn.active[data-theme="main"] {
+      background: var(--main-tint);
+      color: var(--main-2);
+      border-color: var(--main);
+    }
+    .tab-btn.active[data-theme="pink"] {
+      background: var(--pink-tint);
+      color: var(--pink-2);
+      border-color: var(--pink);
+    }
+
+    /* ───────────── STRUCTURAL CSS (index.html で使用・Claude Design 非編集) ───────────── */
+
+    /* OPS NOTE (運用方針) */
+    .ops-note {
+      background: var(--note);
+      border: 1px solid var(--note-edge);
+      border-left: 3px solid var(--note-ink);
+      padding: 16px 18px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--note-ink);
+    }
+    .ops-note h2 {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--note-ink);
+      margin: 0 0 8px;
+    }
+    .ops-note ul { margin: 0; padding-left: 18px; line-height: 1.75; }
+    .ops-note li + li { margin-top: 4px; }
+    .ops-note details { margin-top: 10px; border-top: 1px dashed var(--note-edge); padding-top: 10px; }
+    .ops-note details + details { margin-top: 6px; padding-top: 8px; }
+    .ops-note summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 6px; }
+    .ops-note summary::-webkit-details-marker { display: none; }
+    .ops-note summary::before { content: "+"; font-family: var(--mono); width: 14px; display: inline-block; color: var(--note-ink); }
+    .ops-note details[open] summary::before { content: "−"; }
+    .ops-note details > *:not(summary) { margin-top: 8px; font-size: 12.5px; line-height: 1.75; }
+    .ops-note code { font-family: var(--mono); font-size: 11.5px; background: rgba(255,255,255,.6); border: 1px solid var(--note-edge); padding: 1px 5px; border-radius: 3px; }
+    .ops-note p + p { margin-top: 6px; }
+
+    /* HERO (今日の一言) */
+    .hero {
+      position: relative;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 28px 24px 24px;
+      margin-bottom: 36px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .hero::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(255,255,255,.12); border-radius: 3px; pointer-events: none; }
+    .hero-kicker { position: relative; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+    .hero-kicker::before { content: ""; width: 24px; height: 1px; background: var(--green); }
+    .hero h2 { position: relative; font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.45; letter-spacing: .005em; color: #fff; margin: 0 0 14px; }
+    .hero p.lead { position: relative; font-size: 14.5px; line-height: 1.5; color: oklch(0.92 0.01 85); margin: 0; }
+    .hero-tags { position: relative; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .hero-tags .tag { font-family: var(--mono); font-size: 11px; padding: 3px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; color: var(--green-tint); }
+    .hero details { position: relative; }
+    .hero details.dive { border-top-color: rgba(255,255,255,.18); }
+    .hero details.dive[open] { border-top-color: rgba(255,255,255,.4); }
+    .hero details.dive summary { color: var(--green); }
+    .hero details.dive summary:hover { color: #fff; }
+    .hero details.dive summary::after { color: oklch(0.7 0.04 158); }
+    .hero details.dive .body { color: oklch(0.92 0.01 85); }
+    .hero .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .hero .btn-primary:hover { background: var(--green-tint); }
+    .hero .btn-ghost { background: transparent; color: var(--green-tint); border-color: rgba(255,255,255,.4); }
+    .hero .btn-ghost:hover { background: rgba(255,255,255,.08); color: #fff; border-color: #fff; }
+
+    /* FEATURE CARD (深掘り枠) */
+    .feature { border: 1px solid var(--rule-strong); border-top: 3px solid var(--main); padding: 24px 24px 20px; background: var(--paper); }
+    .feature .feature-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--main); font-weight: 600; margin-bottom: 10px; }
+    .feature .feature-tag::before { content: ""; width: 6px; height: 6px; background: var(--main); border-radius: 50%; }
+    .feature h3 { font-size: 22px; line-height: 1.45; margin-bottom: 12px; }
+    .feature details.dive { border-top-color: var(--main-edge); }
+    .feature details.dive[open] { border-top-color: var(--main); }
+    .feature .btn-primary { background: var(--main-tint); border-color: var(--main); color: var(--main-2); }
+    .feature .btn-primary:hover { background: var(--main-tint); border-color: var(--main-2); }
+    .card.tech .badge-cross { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .14em; color: var(--main-2); padding: 2px 8px; border: 1px solid var(--main-edge); background: var(--main-tint); border-radius: 3px; text-transform: uppercase; }
+
+    /* INDEX CHART */
+    .index-card { padding: 22px 22px 18px; }
+    .index-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 16px; }
+    .index-head h3 { font-family: var(--serif); font-size: 16px; font-weight: 700; margin: 0; color: var(--ink); }
+    .index-head .stamp { font-family: var(--mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .12em; text-transform: uppercase; }
+    .chart { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: end; padding: 6px 0 0; }
+    .bar-col { display: flex; flex-direction: column; align-items: stretch; gap: 6px; min-width: 0; }
+    .bar-track { position: relative; height: 132px; border-bottom: 1px solid var(--rule-strong); display: flex; align-items: flex-end; justify-content: center; }
+    .bar-track::before, .bar-track::after { content: ""; position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed var(--rule); }
+    .bar-track::before { top: 33%; }
+    .bar-track::after  { top: 66%; }
+    .bar { width: 70%; max-width: 44px; background: var(--ink); position: relative; }
+    .bar.up   { background: var(--green); }
+    .bar.flat { background: var(--ink-3); }
+    .bar.down { background: var(--ink-mute); }
+    .bar .val { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .bar .val.pos { color: var(--green-2); }
+    .bar .val.neg { color: oklch(0.45 0.12 25); }
+    .bar-label { text-align: center; font-family: var(--sans); font-size: 11.5px; color: var(--ink-2); font-weight: 500; }
+    .bar-label .unit { display: block; font-family: var(--mono); font-size: 9.5px; color: var(--ink-mute); letter-spacing: .1em; margin-top: 1px; }
+
+    /* TIP BOX */
+    .tip-box { margin-top: 22px; padding: 12px 14px; background: var(--paper-2); border: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); line-height: 1.75; }
+    .tip-box strong { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--main); font-weight: 600; margin-right: 6px; }
+
+    /* TOAST */
+    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--ink); color: var(--paper); padding: 10px 18px; font-size: 13px; font-weight: 500; letter-spacing: .03em; border-radius: 999px; box-shadow: 0 6px 24px oklch(0.30 0.06 278 / .18); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast::before { content: "✓"; margin-right: 8px; color: var(--green); }
   </style>
 </head>
 <body>
@@ -878,13 +711,14 @@
 
     <!-- ───────────── TAB NAV ───────────── -->
     <nav class="tab-nav" aria-label="セクション">
-      <a class="tab-btn active" href="#sec-policy">🏛 国交省・政策</a>
-      <a class="tab-btn" href="#sec-tech">🔧 技術・トレンド</a>
-      <a class="tab-btn" href="#sec-cost">💴 資材・コスト</a>
+      <a class="tab-btn active" data-theme="green" href="#sec-policy">🏛 国交省・政策</a>
+      <a class="tab-btn" data-theme="main" href="#sec-tech">🔧 技術・トレンド</a>
+      <a class="tab-btn" data-theme="pink" href="#sec-cost">💴 資材・コスト</a>
     </nav>
 
     <!-- ───────────── SECTIONS ───────────── -->
-    <section class="sec" id="sec-policy">
+    <!-- THEME 1 : GREEN (60% base) -->
+    <section class="sec" id="sec-policy" data-theme="green">
       <div class="sec-head">
         <div class="label">
           <span class="num">SEC.02</span>
@@ -949,7 +783,8 @@
       </article>
     </section>
 
-    <section class="sec" id="sec-tech">
+    <!-- THEME 2 : MAIN violet-blue (30%) -->
+    <section class="sec" id="sec-tech" data-theme="main">
       <div class="sec-head">
         <div class="label">
           <span class="num">SEC.03</span>
@@ -1006,7 +841,8 @@
       </article>
     </section>
 
-    <section class="sec" id="sec-cost">
+    <!-- THEME 3 : PINK accent (10%) -->
+    <section class="sec" id="sec-cost" data-theme="pink">
       <div class="sec-head">
         <div class="label">
           <span class="num">SEC.04</span>
@@ -1082,6 +918,22 @@
     </footer>
   </div>
 
-  <div id="toast" role="status" aria-live="polite">クリップボードにコピーしました</div>
+  <script>
+    // tab nav active state on scroll
+    const sections = document.querySelectorAll('.sec[data-theme]');
+    const tabs = document.querySelectorAll('.tab-btn');
+    const map = {};
+    tabs.forEach(t => { map[t.getAttribute('href').slice(1)] = t; });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tabs.forEach(t => t.classList.remove('active'));
+          const t = map[e.target.id];
+          if (t) t.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => obs.observe(s));
+  </script>
 </body>
 </html>

@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-PREVIEW_FILE = PROJECT_ROOT / "reference" / "design-preview.html"
+PREVIEW_FILE = PROJECT_ROOT / "reference" / "design-preview-v2.html"
 INDEX_HTML   = PROJECT_ROOT / "index.html"
 
 _STYLE_RE = re.compile(r"<style>(.*?)</style>", re.DOTALL)
