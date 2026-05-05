@@ -9,89 +9,101 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /*
-      ────────────────────────────────────────────────────────────
-      COLOR SYSTEM — 60/30/10 across the color wheel
-      ────────────────────────────────────────────────────────────
-      ベース 60%  : 薄い緑   (hue 145)  — paper / surfaces
-      メイン 30%  : 紫青     (hue 278)  — ink / structure
-      アクセント 10% : ピンク (hue 350)  — highlights / CTA hover
+      ──────────────────────────────────────────────────────
+      COLOR SYSTEM v3 — 60/30/10, カラーホイール3点
+      ──────────────────────────────────────────────────────
+      背景: 白に近いウォームニュートラル（ほぼ無彩色）
+      60% ベース緑  hue 145 → 政策セクション
+      30% 紫青      hue 278 → 技術セクション
+      10% ピンク    hue 350 → コストセクション
 
-      All tones kept LIGHT and LOW-CHROMA so text contrast stays high.
-      3 themes assign one of the three hues as the section accent.
+      セクション内カードに薄いテーマ色背景を使い、
+      セクションをひと目で区別できるようにする。
+      文字色は全セクション共通の濃いネイビーで統一。
     */
     :root {
-      /* ── 60% : base green tint (paper) ── */
-      --paper:        oklch(0.985 0.012 145);   /* very pale green-white */
-      --paper-2:      oklch(0.965 0.018 145);   /* slightly deeper */
-      --paper-3:      oklch(0.945 0.024 145);   /* card hover / wash */
-      --paper-edge:   oklch(0.90  0.022 145);
+      /* ── ページ背景: 白に近いウォームニュートラル ── */
+      --bg:           oklch(0.990 0.003 85);
+      --bg-2:         oklch(0.975 0.005 85);
 
-      --rule:         oklch(0.88  0.018 145);
-      --rule-strong:  oklch(0.74  0.020 145);
+      /* ── インク（全セクション共通） ── */
+      --ink:          oklch(0.22 0.040 265);
+      --ink-2:        oklch(0.38 0.035 265);
+      --ink-3:        oklch(0.52 0.025 265);
+      --ink-mute:     oklch(0.66 0.018 265);
 
-      /* ── 30% : main violet-blue (ink) ── */
-      --ink:          oklch(0.30  0.060 278);   /* high-contrast text */
-      --ink-2:        oklch(0.42  0.055 278);
-      --ink-3:        oklch(0.55  0.040 278);
-      --ink-mute:     oklch(0.68  0.030 278);
+      /* ── ルール線 ── */
+      --rule:         oklch(0.90 0.008 85);
+      --rule-strong:  oklch(0.78 0.012 85);
 
-      --main:         oklch(0.55  0.110 278);   /* purple-blue accent */
-      --main-2:       oklch(0.45  0.110 278);
-      --main-tint:    oklch(0.96  0.025 278);
-      --main-edge:    oklch(0.86  0.045 278);
+      /* ── 緑 (hue 145) — 政策テーマ ── */
+      --green:        oklch(0.48 0.100 148);
+      --green-2:      oklch(0.38 0.100 148);
+      --green-tint:   oklch(0.958 0.030 148);   /* カード背景 */
+      --green-mid:    oklch(0.91  0.050 148);   /* leadStory背景 */
+      --green-deep:   oklch(0.82  0.080 148);   /* leadStory border */
+      --green-edge:   oklch(0.86  0.045 148);
 
-      /* ── 10% : pink accent ── */
-      --pink:         oklch(0.65  0.110 350);
-      --pink-2:       oklch(0.55  0.110 350);
-      --pink-tint:    oklch(0.96  0.030 350);
-      --pink-edge:    oklch(0.86  0.050 350);
+      /* ── 紫青 (hue 278) — 技術テーマ ── */
+      --main:         oklch(0.50 0.120 278);
+      --main-2:       oklch(0.40 0.120 278);
+      --main-tint:    oklch(0.960 0.028 278);
+      --main-mid:     oklch(0.92  0.055 278);
+      --main-deep:    oklch(0.84  0.085 278);
+      --main-edge:    oklch(0.87  0.050 278);
 
-      /* echo green as its own theme accent */
-      --green:        oklch(0.55  0.090 150);
-      --green-2:      oklch(0.45  0.090 150);
-      --green-tint:   oklch(0.95  0.030 150);
-      --green-edge:   oklch(0.84  0.050 150);
+      /* ── ピンク (hue 350) — コストテーマ ── */
+      --pink:         oklch(0.58 0.120 350);
+      --pink-2:       oklch(0.48 0.120 350);
+      --pink-tint:    oklch(0.960 0.030 350);
+      --pink-mid:     oklch(0.93  0.055 350);
+      --pink-deep:    oklch(0.85  0.085 350);
+      --pink-edge:    oklch(0.87  0.055 350);
 
-      /* annotation tint (運用メモ用) */
-      --note:         oklch(0.96 0.020 145);
-      --note-edge:    oklch(0.86 0.030 145);
-      --note-ink:     oklch(0.40 0.060 145);
-
-      --shadow-sm: 0 1px 0 oklch(0.86 0.018 145);
-      --shadow-md: 0 1px 2px oklch(0.30 0.06 278 / .05), 0 4px 14px oklch(0.30 0.06 278 / .05);
+      --shadow-sm: 0 1px 0 oklch(0.88 0.008 85);
+      --shadow-md: 0 1px 3px oklch(0.22 0.04 265 / .06), 0 4px 16px oklch(0.22 0.04 265 / .06);
 
       --radius: 6px;
-
       --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
-      --sans:  "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --sans:  "Noto Sans JP", system-ui, -apple-system, sans-serif;
       --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
 
-    /* per-section theme override: each section maps --accent etc to its hue */
-    .sec[data-theme="green"] {
-      --accent: var(--green);
-      --accent-2: var(--green-2);
-      --accent-tint: var(--green-tint);
-      --accent-edge: var(--green-edge);
-    }
-    .sec[data-theme="main"] {
-      --accent: var(--main);
-      --accent-2: var(--main-2);
-      --accent-tint: var(--main-tint);
-      --accent-edge: var(--main-edge);
-    }
-    .sec[data-theme="pink"] {
-      --accent: var(--pink);
-      --accent-2: var(--pink-2);
-      --accent-tint: var(--pink-tint);
-      --accent-edge: var(--pink-edge);
-    }
-    /* default page accent (used outside sections) — main violet-blue */
-    :root {
+      /* デフォルトアクセント（ヘッダー等、セクション外） */
       --accent:      var(--main);
       --accent-2:    var(--main-2);
       --accent-tint: var(--main-tint);
       --accent-edge: var(--main-edge);
+
+      /* ops-note (運用方針ボックス) */
+      --note:      oklch(0.960 0.020 145);
+      --note-edge: oklch(0.860 0.030 145);
+      --note-ink:  oklch(0.400 0.060 145);
+    }
+
+    /* ── セクション別テーマ変数 ── */
+    .sec[data-theme="green"] {
+      --accent:       var(--green);
+      --accent-2:     var(--green-2);
+      --accent-tint:  var(--green-tint);
+      --accent-mid:   var(--green-mid);
+      --accent-deep:  var(--green-deep);
+      --accent-edge:  var(--green-edge);
+    }
+    .sec[data-theme="main"] {
+      --accent:       var(--main);
+      --accent-2:     var(--main-2);
+      --accent-tint:  var(--main-tint);
+      --accent-mid:   var(--main-mid);
+      --accent-deep:  var(--main-deep);
+      --accent-edge:  var(--main-edge);
+    }
+    .sec[data-theme="pink"] {
+      --accent:       var(--pink);
+      --accent-2:     var(--pink-2);
+      --accent-tint:  var(--pink-tint);
+      --accent-mid:   var(--pink-mid);
+      --accent-deep:  var(--pink-deep);
+      --accent-edge:  var(--pink-edge);
     }
 
     * { box-sizing: border-box; }
@@ -99,8 +111,7 @@
     body {
       font-family: var(--sans);
       color: var(--ink);
-      background:
-        radial-gradient(1200px 600px at 50% -200px, var(--paper-2) 0%, var(--paper) 60%, var(--paper) 100%);
+      background: var(--bg);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       line-height: 1.5;
@@ -182,7 +193,7 @@
       border-radius: 999px;
       font-size: 12px;
       color: var(--ink-2);
-      background: var(--paper);
+      background: var(--bg-2);
     }
     .masthead-foot .pill strong {
       font-family: var(--serif);
@@ -191,8 +202,164 @@
     }
     .masthead-foot .sep { color: var(--ink-mute); }
 
+    /* ───────────── TAB NAV ───────────── */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      padding: 10px 20px;
+      background: oklch(0.990 0.003 85 / 0.93);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: 0 2px 8px oklch(0.22 0.04 265 / 0.05);
+      margin: -28px -20px 28px;
+    }
+    @media (min-width: 640px) {
+      .tab-nav { margin: -40px -32px 32px; padding: 12px 32px; }
+    }
+    .tab-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--rule);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      background: var(--bg);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .tab-btn[data-theme="green"]:hover,
+    .tab-btn.active[data-theme="green"] {
+      border-color: var(--green-edge);
+      color: var(--green-2);
+      background: var(--green-tint);
+    }
+    .tab-btn[data-theme="main"]:hover,
+    .tab-btn.active[data-theme="main"] {
+      border-color: var(--main-edge);
+      color: var(--main-2);
+      background: var(--main-tint);
+    }
+    .tab-btn[data-theme="pink"]:hover,
+    .tab-btn.active[data-theme="pink"] {
+      border-color: var(--pink-edge);
+      color: var(--pink-2);
+      background: var(--pink-tint);
+    }
+    .tab-btn.active[data-theme="green"] { border-color: var(--green); }
+    .tab-btn.active[data-theme="main"]  { border-color: var(--main);  }
+    .tab-btn.active[data-theme="pink"]  { border-color: var(--pink);  }
+
+    /* ───────────── LEAD STORY ───────────── */
+    .lead-story {
+      background: var(--green-mid);
+      border: 1px solid var(--green-deep);
+      border-left: 4px solid var(--green-2);
+      padding: 22px 24px 20px;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .lead-story-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--green-2);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .lead-story-kicker::before {
+      content: "";
+      width: 20px;
+      height: 1.5px;
+      background: var(--green-2);
+    }
+    .lead-story h2 {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: clamp(20px, 4vw, 26px);
+      line-height: 1.45;
+      letter-spacing: .005em;
+      color: var(--ink);
+      margin: 0 0 12px;
+    }
+    .lead-story p.lead {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .lead-story-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .lead-story-tags .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 2px 10px;
+      border: 1px solid var(--green-deep);
+      border-radius: 999px;
+      color: var(--green-2);
+      background: transparent;
+    }
+    .lead-story details.dive {
+      margin-top: 14px;
+      border-top: 1px dashed var(--green-deep);
+      padding-top: 12px;
+    }
+    .lead-story details.dive[open] {
+      border-top-style: solid;
+      border-top-color: var(--green-edge);
+    }
+    .lead-story details.dive summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 600;
+      padding: 2px 0;
+    }
+    .lead-story details.dive summary:hover { color: var(--green-2); }
+    .lead-story details.dive summary::-webkit-details-marker { display: none; }
+    .lead-story details.dive summary::after {
+      content: "＋ 展開";
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-mute);
+      font-weight: 500;
+    }
+    .lead-story details.dive[open] summary::after { content: "− 閉じる"; }
+    .lead-story details.dive .body {
+      margin-top: 10px;
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--ink-2);
+    }
+    .lead-story details.dive .body ul {
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+    .lead-story details.dive .body li + li { margin-top: 3px; }
+
     /* ───────────── SECTION HEAD ───────────── */
-    .sec { margin-bottom: 44px; }
+    .sec { margin-bottom: 48px; }
     .sec-head {
       display: flex;
       align-items: flex-end;
@@ -200,7 +367,7 @@
       gap: 16px;
       border-bottom: 1px solid var(--rule-strong);
       padding-bottom: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       position: relative;
     }
     .sec-head::after {
@@ -208,7 +375,7 @@
       position: absolute;
       left: 0;
       bottom: -1px;
-      width: 64px;
+      width: 56px;
       height: 2px;
       background: var(--accent);
     }
@@ -244,19 +411,19 @@
     .sec-sub {
       font-size: 13px;
       color: var(--ink-3);
-      margin: -8px 0 16px;
+      margin: -6px 0 14px;
       line-height: 1.5;
     }
     .sec-sub strong { color: var(--ink-2); font-weight: 600; }
 
     /* ───────────── CARD ───────────── */
     .card {
-      background: var(--paper);
-      border: 1px solid var(--rule);
+      background: var(--accent-tint);          /* テーマ色の薄い背景 */
+      border: 1px solid var(--accent-edge);
       padding: 18px 20px;
-      margin-bottom: 14px;
-      transition: border-color .15s ease, box-shadow .2s ease, transform .2s ease, background .15s ease;
+      margin-bottom: 12px;
       position: relative;
+      transition: border-color .15s, box-shadow .2s, background .15s;
     }
     .card::before {
       content: "";
@@ -267,14 +434,14 @@
       width: 3px;
       background: var(--accent);
       opacity: 0;
-      transition: opacity .15s ease;
+      transition: opacity .15s;
     }
     .card:hover {
-      border-color: var(--accent-edge);
+      border-color: var(--accent);
       box-shadow: var(--shadow-md);
-      background: var(--paper);
     }
     .card:hover::before { opacity: 1; }
+
     .card .kicker {
       display: flex;
       flex-wrap: wrap;
@@ -288,8 +455,8 @@
       margin-bottom: 8px;
     }
     .card .kicker .cat {
-      color: var(--accent);
-      font-weight: 600;
+      color: var(--accent-2);
+      font-weight: 700;
     }
     .card .kicker .date { color: var(--ink-mute); }
     .card h3 {
@@ -303,7 +470,7 @@
     }
     .card .lead {
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.65;
       color: var(--ink-2);
       margin: 0;
     }
@@ -311,12 +478,11 @@
     /* ───────────── DETAILS (深掘り) ───────────── */
     details.dive {
       margin-top: 14px;
-      border-top: 1px dashed var(--rule);
+      border-top: 1px dashed var(--accent-edge);
       padding-top: 12px;
     }
     details.dive[open] {
       border-top-style: solid;
-      border-top-color: var(--accent-edge);
     }
     details.dive summary {
       cursor: pointer;
@@ -329,17 +495,16 @@
       font-size: 11px;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--ink-2);
+      color: var(--ink-3);
       font-weight: 600;
       padding: 2px 0;
     }
-    details.dive summary:hover { color: var(--accent); }
+    details.dive summary:hover { color: var(--accent-2); }
     details.dive summary::-webkit-details-marker { display: none; }
     details.dive summary::after {
       content: "＋ 展開";
       font-family: var(--mono);
       font-size: 10px;
-      letter-spacing: .1em;
       color: var(--ink-mute);
       font-weight: 500;
     }
@@ -347,11 +512,11 @@
     details.dive .body {
       margin-top: 12px;
       font-size: 13.5px;
-      line-height: 1.5;
+      line-height: 1.65;
       color: var(--ink-2);
     }
-    details.dive .body p + p { margin-top: 8px; }
     details.dive .body p { margin: 0; }
+    details.dive .body p + p { margin-top: 8px; }
     details.dive .body ul {
       margin: 8px 0 0;
       padding-left: 18px;
@@ -365,7 +530,7 @@
       gap: 8px;
       margin-top: 14px;
       padding-top: 10px;
-      border-top: 1px dotted var(--rule);
+      border-top: 1px dotted var(--accent-edge);
       font-family: var(--mono);
       font-size: 10.5px;
       letter-spacing: .06em;
@@ -377,7 +542,8 @@
       height: 4px;
       background: var(--accent);
       border-radius: 50%;
-      opacity: .65;
+      flex: none;
+      opacity: .8;
     }
 
     .actions {
@@ -390,7 +556,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 14px;
+      padding: 8px 14px;
       font-family: var(--sans);
       font-size: 12.5px;
       font-weight: 600;
@@ -402,14 +568,14 @@
       border: 1px solid transparent;
       cursor: pointer;
       text-decoration: none;
-      transition: background .15s ease, border-color .15s ease, color .15s ease, transform .08s ease;
+      transition: background .15s, border-color .15s, color .15s, transform .08s;
     }
     .btn:active { transform: translateY(1px); }
     .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .btn svg { flex: none; }
 
     .btn-primary {
-      background: var(--paper);
+      background: var(--bg);
       color: var(--ink);
       border-color: var(--accent-edge);
     }
@@ -418,16 +584,88 @@
       border-color: var(--accent);
       color: var(--accent-2);
     }
-
     .btn-ghost {
       background: transparent;
       color: var(--ink-2);
-      border-color: var(--rule);
+      border-color: var(--accent-edge);
     }
     .btn-ghost:hover {
       color: var(--ink);
-      border-color: var(--ink-mute);
-      background: var(--paper-2);
+      border-color: var(--accent);
+      background: var(--accent-tint);
+    }
+
+    /* lead-story actions */
+    .lead-story .btn-primary {
+      background: var(--bg);
+      border-color: var(--green-deep);
+    }
+    .lead-story .btn-primary:hover {
+      background: var(--green-tint);
+      border-color: var(--green);
+      color: var(--green-2);
+    }
+    .lead-story .btn-ghost {
+      border-color: var(--green-deep);
+    }
+    .lead-story .btn-ghost:hover {
+      background: var(--green-tint);
+      border-color: var(--green);
+      color: var(--green-2);
+    }
+    .lead-story .source-line {
+      border-top-color: var(--green-deep);
+    }
+    .lead-story .source-line::before {
+      background: var(--green-2);
+    }
+
+    /* ───────────── BADGES ───────────── */
+    .badge-new {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: var(--pink-tint);
+      color: var(--pink-2);
+      border: 1px solid var(--pink-edge);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .badge-maturity {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--rule);
+      color: var(--ink-3);
+      background: var(--bg-2);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .badge-maturity[data-maturity="確定"] {
+      background: var(--accent-tint);
+      border-color: var(--accent-edge);
+      color: var(--accent-2);
+    }
+    .badge-scope-out {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px dashed var(--rule);
+      color: var(--ink-mute);
+      vertical-align: middle;
+      margin-left: 4px;
     }
 
     /* ───────────── FOOTER ───────────── */
@@ -462,124 +700,14 @@
     .colophon code {
       font-family: var(--mono);
       font-size: 11.5px;
-      background: var(--paper-2);
+      background: var(--bg-2);
       border: 1px solid var(--rule);
       padding: 1px 5px;
       border-radius: 3px;
       color: var(--ink);
     }
 
-    /* ───────────── BADGES ───────────── */
-    .badge-new {
-      display: inline-flex;
-      align-items: center;
-      padding: 1px 7px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      background: var(--pink-tint);
-      color: var(--pink-2);
-      border: 1px solid var(--pink-edge);
-      vertical-align: middle;
-      margin-left: 4px;
-    }
-    .badge-maturity {
-      display: inline-flex;
-      align-items: center;
-      padding: 1px 6px;
-      border-radius: 3px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      border: 1px solid var(--rule);
-      color: var(--ink-3);
-      background: var(--paper-2);
-      vertical-align: middle;
-      margin-left: 4px;
-    }
-    .badge-maturity[data-maturity="確定"] {
-      background: var(--accent-tint);
-      border-color: var(--accent-edge);
-      color: var(--accent-2);
-    }
-    .badge-scope-out {
-      display: inline-flex;
-      align-items: center;
-      padding: 1px 6px;
-      border-radius: 3px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      border: 1px dashed var(--rule);
-      color: var(--ink-mute);
-      vertical-align: middle;
-      margin-left: 4px;
-    }
-
-    /* ───────────── TAB NAV ───────────── */
-    .tab-nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 6px;
-      padding: 10px 20px;
-      background: oklch(0.985 0.012 145 / 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--rule);
-      box-shadow: 0 2px 8px oklch(0.30 0.06 278 / 0.05);
-      margin: -28px -20px 28px;
-    }
-    @media (min-width: 640px) {
-      .tab-nav { margin: -40px -32px 32px; padding: 12px 32px; }
-    }
-    .tab-btn {
-      padding: 7px 16px;
-      border-radius: 20px;
-      border: 1.5px solid var(--rule);
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--ink-2);
-      background: var(--paper);
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
-    }
-    .tab-btn[data-theme="green"]:hover {
-      border-color: var(--green-edge);
-      color: var(--green-2);
-      background: var(--green-tint);
-    }
-    .tab-btn[data-theme="main"]:hover {
-      border-color: var(--main-edge);
-      color: var(--main-2);
-      background: var(--main-tint);
-    }
-    .tab-btn[data-theme="pink"]:hover {
-      border-color: var(--pink-edge);
-      color: var(--pink-2);
-      background: var(--pink-tint);
-    }
-    .tab-btn.active[data-theme="green"] {
-      background: var(--green-tint);
-      color: var(--green-2);
-      border-color: var(--green);
-    }
-    .tab-btn.active[data-theme="main"] {
-      background: var(--main-tint);
-      color: var(--main-2);
-      border-color: var(--main);
-    }
-    .tab-btn.active[data-theme="pink"] {
-      background: var(--pink-tint);
-      color: var(--pink-2);
-      border-color: var(--pink);
-    }
-
-    /* ───────────── STRUCTURAL CSS (index.html で使用・Claude Design 非編集) ───────────── */
+    /* ───────────── STRUCTURAL (index.html 専用 / Claude Design 非編集) ───────────── */
 
     /* OPS NOTE (運用方針) */
     .ops-note {
@@ -591,15 +719,7 @@
       font-size: 13px;
       color: var(--note-ink);
     }
-    .ops-note h2 {
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--note-ink);
-      margin: 0 0 8px;
-    }
+    .ops-note h2 { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--note-ink); margin: 0 0 8px; }
     .ops-note ul { margin: 0; padding-left: 18px; line-height: 1.75; }
     .ops-note li + li { margin-top: 4px; }
     .ops-note details { margin-top: 10px; border-top: 1px dashed var(--note-edge); padding-top: 10px; }
@@ -612,39 +732,8 @@
     .ops-note code { font-family: var(--mono); font-size: 11.5px; background: rgba(255,255,255,.6); border: 1px solid var(--note-edge); padding: 1px 5px; border-radius: 3px; }
     .ops-note p + p { margin-top: 6px; }
 
-    /* HERO (今日の一言) — 薄い緑背景で差別化 */
-    .hero {
-      position: relative;
-      background: oklch(0.935 0.030 145);
-      color: var(--ink);
-      padding: 28px 24px 24px;
-      margin-bottom: 36px;
-      border-radius: var(--radius);
-      border: 1px solid var(--green-edge);
-      border-top: 3px solid var(--green);
-      overflow: hidden;
-    }
-    .hero::before { display: none; }
-    .hero-kicker { position: relative; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--main); margin-bottom: 14px; }
-    .hero-kicker::before { content: ""; width: 24px; height: 1px; background: var(--main); }
-    .hero h2 { position: relative; font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.45; letter-spacing: .005em; color: var(--ink); margin: 0 0 14px; }
-    .hero p.lead { position: relative; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); margin: 0; }
-    .hero-tags { position: relative; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .hero-tags .tag { font-family: var(--mono); font-size: 11px; padding: 3px 10px; border: 1px solid var(--green-edge); border-radius: 999px; color: var(--green-2); background: var(--green-tint); }
-    .hero details { position: relative; }
-    .hero details.dive { border-top-color: var(--green-edge); }
-    .hero details.dive[open] { border-top-color: var(--green); }
-    .hero details.dive summary { color: var(--main); }
-    .hero details.dive summary:hover { color: var(--main-2); }
-    .hero details.dive summary::after { color: var(--ink-mute); }
-    .hero details.dive .body { color: var(--ink-2); }
-    .hero .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--green-edge); }
-    .hero .btn-primary:hover { background: var(--green-tint); border-color: var(--green); color: var(--green-2); }
-    .hero .btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--rule); }
-    .hero .btn-ghost:hover { background: var(--paper-2); color: var(--ink); border-color: var(--ink-mute); }
-
     /* FEATURE CARD (深掘り枠) */
-    .feature { border: 1px solid var(--rule-strong); border-top: 3px solid var(--main); padding: 24px 24px 20px; background: var(--paper); }
+    .feature { border: 1px solid var(--rule-strong); border-top: 3px solid var(--main); padding: 24px 24px 20px; background: var(--bg); }
     .feature .feature-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--main); font-weight: 600; margin-bottom: 10px; }
     .feature .feature-tag::before { content: ""; width: 6px; height: 6px; background: var(--main); border-radius: 50%; }
     .feature h3 { font-size: 22px; line-height: 1.45; margin-bottom: 12px; }
@@ -652,7 +741,6 @@
     .feature details.dive[open] { border-top-color: var(--main); }
     .feature .btn-primary { background: var(--main-tint); border-color: var(--main); color: var(--main-2); }
     .feature .btn-primary:hover { background: var(--main-tint); border-color: var(--main-2); }
-    .card.tech .badge-cross { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .14em; color: var(--main-2); padding: 2px 8px; border: 1px solid var(--main-edge); background: var(--main-tint); border-radius: 3px; text-transform: uppercase; }
 
     /* INDEX CHART */
     .index-card { padding: 22px 22px 18px; }
@@ -676,11 +764,11 @@
     .bar-label .unit { display: block; font-family: var(--mono); font-size: 9.5px; color: var(--ink-mute); letter-spacing: .1em; margin-top: 1px; }
 
     /* TIP BOX */
-    .tip-box { margin-top: 22px; padding: 12px 14px; background: var(--paper-2); border: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); line-height: 1.75; }
+    .tip-box { margin-top: 22px; padding: 12px 14px; background: var(--bg-2); border: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); line-height: 1.75; }
     .tip-box strong { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--main); font-weight: 600; margin-right: 6px; }
 
     /* TOAST */
-    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--ink); color: var(--paper); padding: 10px 18px; font-size: 13px; font-weight: 500; letter-spacing: .03em; border-radius: 999px; box-shadow: 0 6px 24px oklch(0.30 0.06 278 / .18); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--ink); color: var(--bg); padding: 10px 18px; font-size: 13px; font-weight: 500; letter-spacing: .03em; border-radius: 999px; box-shadow: 0 6px 24px oklch(0.22 0.04 265 / .18); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     #toast::before { content: "✓"; margin-right: 8px; color: var(--green); }
   </style>
@@ -741,22 +829,22 @@
       </details>
     </section>
 
-    <!-- ───────────── 今日の一言（HERO） ───────────── -->
-    <section
-      class="hero news-clip"
+    <!-- ───────────── 今日の一言（LEAD STORY） ───────────── -->
+    <div
+      class="lead-story news-clip"
       data-clip-title="国交省、令和8年度の公共工事積算基準の改定案を公表 — 設計・積算の前提が一部見直しへ"
       data-clip-url="https://www.mlit.go.jp/report/press/"
       data-clip-section="今日の一言"
       data-clip-date="2026-04-26"
       data-clip-lead="公共工事の積算ルールに関わる改定の方向性が示され、来年度以降の入札・見積りの前提整理が本格化。設計段階からのコスト感のすり合わせが早めに必要になりそうです。発注者・設計者・施工者で、どの版の基準を前提に見積りを固めるかの合意形成がボトルネックになりやすいです。"
       data-clip-bullets="公示・解説が出揃うまで設計条件書の数値前提が一時的にブレる可能性|JV構成や下請け単価の再試算が必要になる案件が増える見込み|一次ソースは国交省の報道発表・関連ページを日次で確認するのが確実"
-     style="background-color: rgb(2, 2, 2)">
-      <div class="hero-kicker">Lead Story ／ 今日の一言</div>
+    >
+      <div class="lead-story-kicker">Lead Story ／ 今日の一言</div>
       <h2>国交省、令和8年度の公共工事積算基準の改定案を公表 — 設計・積算の前提が一部見直しへ</h2>
       <p class="lead">
         公共工事の積算ルールに関わる改定の方向性が示され、来年度以降の入札・見積りの前提整理が本格化。設計段階からのコスト感のすり合わせが早めに必要になりそうです。発注者・設計者・施工者で、どの版の基準を前提に見積りを固めるかの合意形成がボトルネックになりやすいです。
       </p>
-      <div class="hero-tags">
+      <div class="lead-story-tags">
         <span class="tag">#国交省</span>
         <span class="tag">#公共工事</span>
         <span class="tag">#積算</span>
@@ -774,6 +862,7 @@
           </ul>
         </div>
       </details>
+      <div class="source-line">国土交通省 ／ 2026-04-26</div>
       <div class="actions">
         <a href="https://www.mlit.go.jp/report/press/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -784,7 +873,7 @@
           後追い用にコピー
         </button>
       </div>
-    </section>
+    </div>
 
     <!-- ───────────── 深掘り枠 ───────────── -->
     <section class="sec" id="deep-dive">
@@ -1402,7 +1491,7 @@
             if (t) t.classList.add('active');
           }
         });
-      }, { rootMargin: '-40% 0px -55% 0px' });
+      }, { rootMargin: '-35% 0px -60% 0px' });
       sections.forEach(function (s) { obs.observe(s); });
     })();
   </script>

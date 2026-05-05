@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>土木 Daily News — Design Preview v3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /*
+      ──────────────────────────────────────────────────────
+      COLOR SYSTEM v3 — 60/30/10, カラーホイール3点
+      ──────────────────────────────────────────────────────
+      背景: 白に近いウォームニュートラル（ほぼ無彩色）
+      60% ベース緑  hue 145 → 政策セクション
+      30% 紫青      hue 278 → 技術セクション
+      10% ピンク    hue 350 → コストセクション
+
+      セクション内カードに薄いテーマ色背景を使い、
+      セクションをひと目で区別できるようにする。
+      文字色は全セクション共通の濃いネイビーで統一。
+    */
+    :root {
+      /* ── ページ背景: 白に近いウォームニュートラル ── */
+      --bg:           oklch(0.990 0.003 85);
+      --bg-2:         oklch(0.975 0.005 85);
+
+      /* ── インク（全セクション共通） ── */
+      --ink:          oklch(0.22 0.040 265);
+      --ink-2:        oklch(0.38 0.035 265);
+      --ink-3:        oklch(0.52 0.025 265);
+      --ink-mute:     oklch(0.66 0.018 265);
+
+      /* ── ルール線 ── */
+      --rule:         oklch(0.90 0.008 85);
+      --rule-strong:  oklch(0.78 0.012 85);
+
+      /* ── 緑 (hue 145) — 政策テーマ ── */
+      --green:        oklch(0.48 0.100 148);
+      --green-2:      oklch(0.38 0.100 148);
+      --green-tint:   oklch(0.958 0.030 148);   /* カード背景 */
+      --green-mid:    oklch(0.91  0.050 148);   /* leadStory背景 */
+      --green-deep:   oklch(0.82  0.080 148);   /* leadStory border */
+      --green-edge:   oklch(0.86  0.045 148);
+
+      /* ── 紫青 (hue 278) — 技術テーマ ── */
+      --main:         oklch(0.50 0.120 278);
+      --main-2:       oklch(0.40 0.120 278);
+      --main-tint:    oklch(0.960 0.028 278);
+      --main-mid:     oklch(0.92  0.055 278);
+      --main-deep:    oklch(0.84  0.085 278);
+      --main-edge:    oklch(0.87  0.050 278);
+
+      /* ── ピンク (hue 350) — コストテーマ ── */
+      --pink:         oklch(0.58 0.120 350);
+      --pink-2:       oklch(0.48 0.120 350);
+      --pink-tint:    oklch(0.960 0.030 350);
+      --pink-mid:     oklch(0.93  0.055 350);
+      --pink-deep:    oklch(0.85  0.085 350);
+      --pink-edge:    oklch(0.87  0.055 350);
+
+      --shadow-sm: 0 1px 0 oklch(0.88 0.008 85);
+      --shadow-md: 0 1px 3px oklch(0.22 0.04 265 / .06), 0 4px 16px oklch(0.22 0.04 265 / .06);
+
+      --radius: 6px;
+      --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      --sans:  "Noto Sans JP", system-ui, -apple-system, sans-serif;
+      --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      /* デフォルトアクセント（ヘッダー等、セクション外） */
+      --accent:      var(--main);
+      --accent-2:    var(--main-2);
+      --accent-tint: var(--main-tint);
+      --accent-edge: var(--main-edge);
+
+      /* ops-note (運用方針ボックス) */
+      --note:      oklch(0.960 0.020 145);
+      --note-edge: oklch(0.860 0.030 145);
+      --note-ink:  oklch(0.400 0.060 145);
+    }
+
+    /* ── セクション別テーマ変数 ── */
+    .sec[data-theme="green"] {
+      --accent:       var(--green);
+      --accent-2:     var(--green-2);
+      --accent-tint:  var(--green-tint);
+      --accent-mid:   var(--green-mid);
+      --accent-deep:  var(--green-deep);
+      --accent-edge:  var(--green-edge);
+    }
+    .sec[data-theme="main"] {
+      --accent:       var(--main);
+      --accent-2:     var(--main-2);
+      --accent-tint:  var(--main-tint);
+      --accent-mid:   var(--main-mid);
+      --accent-deep:  var(--main-deep);
+      --accent-edge:  var(--main-edge);
+    }
+    .sec[data-theme="pink"] {
+      --accent:       var(--pink);
+      --accent-2:     var(--pink-2);
+      --accent-tint:  var(--pink-tint);
+      --accent-mid:   var(--pink-mid);
+      --accent-deep:  var(--pink-deep);
+      --accent-edge:  var(--pink-edge);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 28px 20px 96px;
+    }
+    @media (min-width: 640px) {
+      .page { padding: 40px 32px 120px; }
+    }
+
+    /* ───────────── MASTHEAD ───────────── */
+    .masthead {
+      border-top: 3px double var(--rule-strong);
+      border-bottom: 1px solid var(--rule-strong);
+      padding: 18px 0 14px;
+      margin-bottom: 28px;
+    }
+    .masthead-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .masthead-meta .left { display: flex; gap: 14px; flex-wrap: wrap; }
+    .masthead-meta .dot { color: var(--ink-mute); }
+    .masthead h1 {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(36px, 8vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 6px 0 4px;
+      font-feature-settings: "palt";
+    }
+    .masthead h1 .en {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 0.32em;
+      letter-spacing: .35em;
+      color: var(--main);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .masthead-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      align-items: baseline;
+      font-size: 13px;
+      color: var(--ink-2);
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      margin-top: 14px;
+    }
+    .masthead-foot time {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .masthead-foot .pill {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 2px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--ink-2);
+      background: var(--bg-2);
+    }
+    .masthead-foot .pill strong {
+      font-family: var(--serif);
+      font-weight: 700;
+      color: var(--pink-2);
+    }
+    .masthead-foot .sep { color: var(--ink-mute); }
+
+    /* ───────────── TAB NAV ───────────── */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      padding: 10px 20px;
+      background: oklch(0.990 0.003 85 / 0.93);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: 0 2px 8px oklch(0.22 0.04 265 / 0.05);
+      margin: -28px -20px 28px;
+    }
+    @media (min-width: 640px) {
+      .tab-nav { margin: -40px -32px 32px; padding: 12px 32px; }
+    }
+    .tab-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--rule);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      background: var(--bg);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .tab-btn[data-theme="green"]:hover,
+    .tab-btn.active[data-theme="green"] {
+      border-color: var(--green-edge);
+      color: var(--green-2);
+      background: var(--green-tint);
+    }
+    .tab-btn[data-theme="main"]:hover,
+    .tab-btn.active[data-theme="main"] {
+      border-color: var(--main-edge);
+      color: var(--main-2);
+      background: var(--main-tint);
+    }
+    .tab-btn[data-theme="pink"]:hover,
+    .tab-btn.active[data-theme="pink"] {
+      border-color: var(--pink-edge);
+      color: var(--pink-2);
+      background: var(--pink-tint);
+    }
+    .tab-btn.active[data-theme="green"] { border-color: var(--green); }
+    .tab-btn.active[data-theme="main"]  { border-color: var(--main);  }
+    .tab-btn.active[data-theme="pink"]  { border-color: var(--pink);  }
+
+    /* ───────────── LEAD STORY ───────────── */
+    .lead-story {
+      background: var(--green-mid);
+      border: 1px solid var(--green-deep);
+      border-left: 4px solid var(--green-2);
+      padding: 22px 24px 20px;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .lead-story-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--green-2);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .lead-story-kicker::before {
+      content: "";
+      width: 20px;
+      height: 1.5px;
+      background: var(--green-2);
+    }
+    .lead-story h2 {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: clamp(20px, 4vw, 26px);
+      line-height: 1.45;
+      letter-spacing: .005em;
+      color: var(--ink);
+      margin: 0 0 12px;
+    }
+    .lead-story p.lead {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .lead-story-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .lead-story-tags .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 2px 10px;
+      border: 1px solid var(--green-deep);
+      border-radius: 999px;
+      color: var(--green-2);
+      background: transparent;
+    }
+    .lead-story details.dive {
+      margin-top: 14px;
+      border-top: 1px dashed var(--green-deep);
+      padding-top: 12px;
+    }
+    .lead-story details.dive[open] {
+      border-top-style: solid;
+      border-top-color: var(--green-edge);
+    }
+    .lead-story details.dive summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 600;
+      padding: 2px 0;
+    }
+    .lead-story details.dive summary:hover { color: var(--green-2); }
+    .lead-story details.dive summary::-webkit-details-marker { display: none; }
+    .lead-story details.dive summary::after {
+      content: "＋ 展開";
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-mute);
+      font-weight: 500;
+    }
+    .lead-story details.dive[open] summary::after { content: "− 閉じる"; }
+    .lead-story details.dive .body {
+      margin-top: 10px;
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--ink-2);
+    }
+    .lead-story details.dive .body ul {
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+    .lead-story details.dive .body li + li { margin-top: 3px; }
+
+    /* ───────────── SECTION HEAD ───────────── */
+    .sec { margin-bottom: 48px; }
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--rule-strong);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .sec-head::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 56px;
+      height: 2px;
+      background: var(--accent);
+    }
+    .sec-head .label {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      min-width: 0;
+    }
+    .sec-head .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: .12em;
+      font-weight: 500;
+    }
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .sec-head .meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-mute);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .sec-sub {
+      font-size: 13px;
+      color: var(--ink-3);
+      margin: -6px 0 14px;
+      line-height: 1.5;
+    }
+    .sec-sub strong { color: var(--ink-2); font-weight: 600; }
+
+    /* ───────────── CARD ───────────── */
+    .card {
+      background: var(--accent-tint);          /* テーマ色の薄い背景 */
+      border: 1px solid var(--accent-edge);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      position: relative;
+      transition: border-color .15s, box-shadow .2s, background .15s;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      bottom: -1px;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity .15s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card .kicker {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 8px;
+    }
+    .card .kicker .cat {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+    .card .kicker .date { color: var(--ink-mute); }
+    .card h3 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0 0 8px;
+      letter-spacing: .005em;
+    }
+    .card .lead {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-2);
+      margin: 0;
+    }
+
+    /* ───────────── DETAILS (深掘り) ───────────── */
+    details.dive {
+      margin-top: 14px;
+      border-top: 1px dashed var(--accent-edge);
+      padding-top: 12px;
+    }
+    details.dive[open] {
+      border-top-style: solid;
+    }
+    details.dive summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 600;
+      padding: 2px 0;
+    }
+    details.dive summary:hover { color: var(--accent-2); }
+    details.dive summary::-webkit-details-marker { display: none; }
+    details.dive summary::after {
+      content: "＋ 展開";
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-mute);
+      font-weight: 500;
+    }
+    details.dive[open] summary::after { content: "− 閉じる"; }
+    details.dive .body {
+      margin-top: 12px;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--ink-2);
+    }
+    details.dive .body p { margin: 0; }
+    details.dive .body p + p { margin-top: 8px; }
+    details.dive .body ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+    details.dive .body ul li + li { margin-top: 3px; }
+
+    /* ───────────── SOURCE LINE & ACTIONS ───────────── */
+    .source-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dotted var(--accent-edge);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .06em;
+      color: var(--ink-mute);
+    }
+    .source-line::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex: none;
+      opacity: .8;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .03em;
+      line-height: 1.2;
+      white-space: nowrap;
+      word-break: keep-all;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s, border-color .15s, color .15s, transform .08s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .btn svg { flex: none; }
+
+    .btn-primary {
+      background: var(--bg);
+      color: var(--ink);
+      border-color: var(--accent-edge);
+    }
+    .btn-primary:hover {
+      background: var(--accent-tint);
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-2);
+      border-color: var(--accent-edge);
+    }
+    .btn-ghost:hover {
+      color: var(--ink);
+      border-color: var(--accent);
+      background: var(--accent-tint);
+    }
+
+    /* lead-story actions */
+    .lead-story .btn-primary {
+      background: var(--bg);
+      border-color: var(--green-deep);
+    }
+    .lead-story .btn-primary:hover {
+      background: var(--green-tint);
+      border-color: var(--green);
+      color: var(--green-2);
+    }
+    .lead-story .btn-ghost {
+      border-color: var(--green-deep);
+    }
+    .lead-story .btn-ghost:hover {
+      background: var(--green-tint);
+      border-color: var(--green);
+      color: var(--green-2);
+    }
+    .lead-story .source-line {
+      border-top-color: var(--green-deep);
+    }
+    .lead-story .source-line::before {
+      background: var(--green-2);
+    }
+
+    /* ───────────── BADGES ───────────── */
+    .badge-new {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: var(--pink-tint);
+      color: var(--pink-2);
+      border: 1px solid var(--pink-edge);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .badge-maturity {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--rule);
+      color: var(--ink-3);
+      background: var(--bg-2);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .badge-maturity[data-maturity="確定"] {
+      background: var(--accent-tint);
+      border-color: var(--accent-edge);
+      color: var(--accent-2);
+    }
+    .badge-scope-out {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px dashed var(--rule);
+      color: var(--ink-mute);
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    /* ───────────── FOOTER ───────────── */
+    footer.colophon {
+      border-top: 3px double var(--rule-strong);
+      margin-top: 56px;
+      padding-top: 24px;
+      font-size: 13px;
+      color: var(--ink-2);
+    }
+    .colophon-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px 32px;
+    }
+    @media (min-width: 640px) {
+      .colophon-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .colophon-grid h4 {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--main);
+      font-weight: 600;
+      margin: 0 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .colophon-grid p { margin: 0; line-height: 1.75; }
+    .colophon-grid p + p { margin-top: 4px; }
+    .colophon code {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--ink);
+    }
+
+    /* ───────────── STRUCTURAL (index.html 専用 / Claude Design 非編集) ───────────── */
+
+    /* OPS NOTE (運用方針) */
+    .ops-note {
+      background: var(--note);
+      border: 1px solid var(--note-edge);
+      border-left: 3px solid var(--note-ink);
+      padding: 16px 18px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--note-ink);
+    }
+    .ops-note h2 { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--note-ink); margin: 0 0 8px; }
+    .ops-note ul { margin: 0; padding-left: 18px; line-height: 1.75; }
+    .ops-note li + li { margin-top: 4px; }
+    .ops-note details { margin-top: 10px; border-top: 1px dashed var(--note-edge); padding-top: 10px; }
+    .ops-note details + details { margin-top: 6px; padding-top: 8px; }
+    .ops-note summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 6px; }
+    .ops-note summary::-webkit-details-marker { display: none; }
+    .ops-note summary::before { content: "+"; font-family: var(--mono); width: 14px; display: inline-block; color: var(--note-ink); }
+    .ops-note details[open] summary::before { content: "−"; }
+    .ops-note details > *:not(summary) { margin-top: 8px; font-size: 12.5px; line-height: 1.75; }
+    .ops-note code { font-family: var(--mono); font-size: 11.5px; background: rgba(255,255,255,.6); border: 1px solid var(--note-edge); padding: 1px 5px; border-radius: 3px; }
+    .ops-note p + p { margin-top: 6px; }
+
+    /* FEATURE CARD (深掘り枠) */
+    .feature { border: 1px solid var(--rule-strong); border-top: 3px solid var(--main); padding: 24px 24px 20px; background: var(--bg); }
+    .feature .feature-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--main); font-weight: 600; margin-bottom: 10px; }
+    .feature .feature-tag::before { content: ""; width: 6px; height: 6px; background: var(--main); border-radius: 50%; }
+    .feature h3 { font-size: 22px; line-height: 1.45; margin-bottom: 12px; }
+    .feature details.dive { border-top-color: var(--main-edge); }
+    .feature details.dive[open] { border-top-color: var(--main); }
+    .feature .btn-primary { background: var(--main-tint); border-color: var(--main); color: var(--main-2); }
+    .feature .btn-primary:hover { background: var(--main-tint); border-color: var(--main-2); }
+
+    /* INDEX CHART */
+    .index-card { padding: 22px 22px 18px; }
+    .index-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 16px; }
+    .index-head h3 { font-family: var(--serif); font-size: 16px; font-weight: 700; margin: 0; color: var(--ink); }
+    .index-head .stamp { font-family: var(--mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .12em; text-transform: uppercase; }
+    .chart { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: end; padding: 6px 0 0; }
+    .bar-col { display: flex; flex-direction: column; align-items: stretch; gap: 6px; min-width: 0; }
+    .bar-track { position: relative; height: 132px; border-bottom: 1px solid var(--rule-strong); display: flex; align-items: flex-end; justify-content: center; }
+    .bar-track::before, .bar-track::after { content: ""; position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed var(--rule); }
+    .bar-track::before { top: 33%; }
+    .bar-track::after  { top: 66%; }
+    .bar { width: 70%; max-width: 44px; background: var(--ink); position: relative; }
+    .bar.up   { background: var(--green); }
+    .bar.flat { background: var(--ink-3); }
+    .bar.down { background: var(--ink-mute); }
+    .bar .val { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .bar .val.pos { color: var(--green-2); }
+    .bar .val.neg { color: oklch(0.45 0.12 25); }
+    .bar-label { text-align: center; font-family: var(--sans); font-size: 11.5px; color: var(--ink-2); font-weight: 500; }
+    .bar-label .unit { display: block; font-family: var(--mono); font-size: 9.5px; color: var(--ink-mute); letter-spacing: .1em; margin-top: 1px; }
+
+    /* TIP BOX */
+    .tip-box { margin-top: 22px; padding: 12px 14px; background: var(--bg-2); border: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); line-height: 1.75; }
+    .tip-box strong { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--main); font-weight: 600; margin-right: 6px; }
+
+    /* TOAST */
+    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--ink); color: var(--bg); padding: 10px 18px; font-size: 13px; font-weight: 500; letter-spacing: .03em; border-radius: 999px; box-shadow: 0 6px 24px oklch(0.22 0.04 265 / .18); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast::before { content: "✓"; margin-right: 8px; color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ───────────── MASTHEAD ───────────── -->
+    <header class="masthead">
+      <div class="masthead-meta">
+        <div class="left">
+          <span>Vol. 12</span>
+          <span class="dot">/</span>
+          <span>Morning Edition</span>
+        </div>
+        <div>毎朝 7:00 配信</div>
+      </div>
+      <h1>
+        <span class="en">Civil Engineering Daily</span>
+        土木 Daily News
+      </h1>
+      <div class="masthead-foot">
+        <time datetime="2026-05-05">2026年5月5日（火）</time>
+        <span class="sep">·</span>
+        <span class="pill">本日のピックアップ <strong>6</strong> 件</span>
+        <span class="sep">·</span>
+        <span>自動生成 2026-05-05</span>
+      </div>
+    </header>
+
+    <!-- ───────────── TAB NAV ───────────── -->
+    <nav class="tab-nav" aria-label="セクション">
+      <a class="tab-btn active" data-theme="green" href="#sec-policy">🏛 国交省・政策</a>
+      <a class="tab-btn" data-theme="main" href="#sec-tech">🔧 技術・トレンド</a>
+      <a class="tab-btn" data-theme="pink" href="#sec-cost">💴 資材・コスト</a>
+    </nav>
+
+    <!-- ───────────── LEAD STORY ───────────── -->
+    <div class="lead-story">
+      <div class="lead-story-kicker">Lead Story ／ 今日の一言</div>
+      <h2>国交省、令和8年度の公共工事積算基準の改定案を公表 — 設計・積算の前提が一部見直しへ</h2>
+      <p class="lead">
+        公共工事の積算ルールに関わる改定の方向性が示され、来年度以降の入札・見積りの前提整理が本格化。設計段階からのコスト感のすり合わせが早めに必要になりそうです。発注者・設計者・施工者で、どの版の基準を前提に見積りを固めるかの合意形成がボトルネックになりやすいです。
+      </p>
+      <div class="lead-story-tags">
+        <span class="tag">#国交省</span>
+        <span class="tag">#公共工事</span>
+        <span class="tag">#積算</span>
+      </div>
+      <details class="dive">
+        <summary>深掘り・論点・次に見る場所</summary>
+        <div class="body">
+          <ul>
+            <li>改定内容の詳細は国土交通省ホームページの「積算基準等」ページを確認</li>
+            <li>論点：単価改定の適用タイミングと既発注案件への影響範囲</li>
+            <li>次のアクション：社内の積算担当に共有し、現在進行中の案件への影響を確認</li>
+          </ul>
+        </div>
+      </details>
+      <div class="source-line">国土交通省 ／ 2026-05-05</div>
+      <div class="actions">
+        <a href="#" class="btn btn-primary">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          ソースを開く
+        </a>
+        <button type="button" class="btn btn-ghost">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          後追い用にコピー
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- THEME 1 : GREEN — 国交省・政策 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="sec" id="sec-policy" data-theme="green">
+      <div class="sec-head">
+        <div class="label">
+          <span class="num">SEC.02</span>
+          <h2>国交省・規制・政策動向</h2>
+        </div>
+        <span class="meta">Policy ／ 2 件</span>
+      </div>
+
+      <article class="card news-clip">
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.05.05</span>
+          <span class="badge-new">NEW</span>
+          <span class="badge-maturity" data-maturity="確定">確定</span>
+        </div>
+        <h3>国土交通省、直轄土木業務に生成AI活用方針を特記仕様書に明記へ</h3>
+        <p class="lead">国土交通省は2026年5月以降、全国の直轄土木業務において生成AI活用方針を特記仕様書に順次明記する方針です。建設コンサルタント業務などで受注者に生成AIの利用を促し、受発注者双方の業務効率化を図ります。</p>
+        <details class="dive">
+          <summary>深掘り</summary>
+          <div class="body">
+            <ul>
+              <li>対象：全国の直轄土木設計・調査業務（2026年5月発注分より順次）</li>
+              <li>生成AIの活用記録・レポートの提出を義務化する方向で検討中</li>
+              <li>受注者の技術力底上げとコスト削減の両立が狙い</li>
+            </ul>
+          </div>
+        </details>
+        <div class="source-line">日経クロステック建設 ／ 2026-05-05</div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            後追い用にコピー
+          </button>
+        </div>
+      </article>
+
+      <article class="card news-clip">
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.04.28</span>
+          <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>改正建設業法と取適法、建設業界に変革迫る2つの法改正を徹底解説</h3>
+        <p class="lead">2025年12月に全面施行された改正建設業法と、2026年1月に施行された中小受託取引適正化法（取適法）が、建設業界に変革を迫ると専門記者が解説しています。</p>
+        <div class="source-line">日経クロステック建設 ／ 2026-04-28</div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            後追い用にコピー
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- THEME 2 : MAIN violet-blue — 技術・トレンド -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="sec" id="sec-tech" data-theme="main">
+      <div class="sec-head">
+        <div class="label">
+          <span class="num">SEC.03</span>
+          <h2>技術・トレンド</h2>
+        </div>
+        <span class="meta">Tech ／ 2 件</span>
+      </div>
+      <p class="sec-sub"><strong>建築・土木共通</strong>で追うトピック（i-Construction、現場の自動運転・自律機械、BIM/CIM など）をここにまとめます。</p>
+
+      <article class="card news-clip">
+        <div class="kicker">
+          <span class="cat">Tech</span>
+          <span>·</span>
+          <span class="date">2026.05.04</span>
+          <span class="badge-new">NEW</span>
+          <span class="badge-maturity" data-maturity="確定">確定</span>
+        </div>
+        <h3>シールドトンネルの注入孔から土砂流入、道路陥没の恐れ 裏込めに問題か</h3>
+        <p class="lead">東京都足立区の水道工事現場で、地下シールドトンネルの注入孔を開けた際に大量の水と土砂が流入しました。裏込め注入に問題があった可能性があり、トンネル上の地中に空洞が生じ道路陥没の恐れがあります。</p>
+        <div class="source-line">日経クロステック建設 ／ 2026-05-04</div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            後追い用にコピー
+          </button>
+        </div>
+      </article>
+
+      <article class="card news-clip">
+        <div class="kicker">
+          <span class="cat">Tech</span>
+          <span>·</span>
+          <span class="date">2026.04.27</span>
+          <span class="badge-maturity" data-maturity="確定">確定</span>
+          <span class="badge-scope-out">スコープ外参考</span>
+        </div>
+        <h3>補強工事中に橋脚杭が7cm沈下、洗掘防止のコンクリート撤去が影響か</h3>
+        <p class="lead">堺市の平岡大橋で耐震補強工事中に橋脚杭が約7cm沈下し、2026年4月17日から通行止めとなっています。洗掘防止用の既設コンクリートを撤去したことが影響した可能性があります。</p>
+        <div class="source-line">日刊建設工業新聞 ／ 2026-04-27</div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            後追い用にコピー
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- THEME 3 : PINK — 資材・コスト -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="sec" id="sec-cost" data-theme="pink">
+      <div class="sec-head">
+        <div class="label">
+          <span class="num">SEC.04</span>
+          <h2>資材価格・コスト動向</h2>
+        </div>
+        <span class="meta">Cost ／ 2 件</span>
+      </div>
+
+      <article class="card news-clip">
+        <div class="kicker">
+          <span class="cat">Cost</span>
+          <span>·</span>
+          <span class="date">2026.04.28</span>
+          <span class="badge-maturity" data-maturity="確定">確定</span>
+        </div>
+        <h3>建設コンサルの外注費を独自調査 213社の6割が増加、外注比率も上昇</h3>
+        <p class="lead">日経クロステックの独自調査によると、建設コンサルタント213社のうち、約6割が前期と比べ外注費を増加させていることが判明しました。政府による下請法の改正も背景にあります。</p>
+        <div class="source-line">日経クロステック建設 ／ 2026-04-28</div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            後追い用にコピー
+          </button>
+        </div>
+      </article>
+
+      <article class="card news-clip">
+        <div class="kicker">
+          <span class="cat">Cost</span>
+          <span>·</span>
+          <span class="date">2026.04.27</span>
+          <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>建設コンサルタントの年収は？ 大手18社は平均762万円、トップは日本工営</h3>
+        <p class="lead">物価高や人材獲得競争の激化を受け、建設コンサルタント業界では賃上げの動きが広がっています。2025年度に基本給の賃上げを実施した企業は9割を超えました。</p>
+        <div class="source-line">日経クロステック建設 ／ 2026-04-27</div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            後追い用にコピー
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ───────────── COLOPHON ───────────── -->
+    <footer class="colophon">
+      <div class="colophon-grid">
+        <div>
+          <h4>Next Update ／ 次回更新</h4>
+          <p>毎朝 7:00 GitHub Actions 自動実行</p>
+          <p style="color: var(--ink-mute); font-size: 12px;">RSS 取得 → Gemini 要約 → index.html 自動生成</p>
+        </div>
+        <div>
+          <h4>Sources ／ 参照ソース（予定）</h4>
+          <p style="font-size: 12.5px;">国土交通省、日経コンストラクション、建設通信、建設物価指数 など</p>
+        </div>
+        <div style="grid-column: 1 / -1;">
+          <h4>Filing ／ 後追いの置き場所</h4>
+          <p style="font-size: 12.5px;">
+            GitHub 上で <code>clips/inbox.md</code> や <code>clips/projects/</code> を直接編集（Web UI → ✏️ ボタン）するか、PC でリポジトリを clone して編集後 push してください。<code>clips/log/</code> は GitHub Actions が自動追記します（手動編集不要）。
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // タブのアクティブ状態をスクロールに追従させる
+    const sections = document.querySelectorAll('.sec[data-theme]');
+    const tabs = document.querySelectorAll('.tab-btn');
+    const tabMap = {};
+    tabs.forEach(t => { tabMap[t.getAttribute('href').slice(1)] = t; });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tabs.forEach(t => t.classList.remove('active'));
+          const t = tabMap[e.target.id];
+          if (t) t.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    sections.forEach(s => obs.observe(s));
+  </script>
+</body>
+</html>
