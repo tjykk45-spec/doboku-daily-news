@@ -15,6 +15,7 @@ import sys
 from datetime import date, datetime, timedelta
 from html import escape
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "clips" / "data"
@@ -253,7 +254,7 @@ def generate_sections_html(articles: list[dict]) -> str:
 # index.html 更新
 # ---------------------------------------------------------------------------
 
-def _masthead_html(today: date, total: int) -> str:
+def _masthead_html(today: date, total: int, now_jst: str) -> str:
     weekday = _JA_WEEKDAYS[today.weekday()]
     date_str = f"{today.year}年{today.month}月{today.day}日（{weekday}）"
     return (
@@ -262,19 +263,19 @@ def _masthead_html(today: date, total: int) -> str:
         f'        <span class="sep">·</span>\n'
         f'        <span class="pill">本日のピックアップ <strong>{total}</strong> 件</span>\n'
         f'        <span class="sep">·</span>\n'
-        f'        <span>自動生成 {today.isoformat()}</span>\n'
+        f'        <span class="last-updated">最終更新: {now_jst}</span>\n'
         f'        <!-- DAILY-NEWS:MASTHEAD:END -->'
     )
 
 
-def update_index_html(articles: list[dict]) -> None:
+def update_index_html(articles: list[dict], now_jst: str) -> None:
     today = date.today()
     html = INDEX_HTML.read_text(encoding="utf-8")
 
     # masthead 更新
     html = re.sub(
         r"<!-- DAILY-NEWS:MASTHEAD:START -->.*?<!-- DAILY-NEWS:MASTHEAD:END -->",
-        _masthead_html(today, len(articles)),
+        _masthead_html(today, len(articles), now_jst),
         html,
         flags=re.DOTALL,
     )
@@ -314,8 +315,11 @@ def main() -> int:
     except (AttributeError, OSError):
         pass
 
+    JST = ZoneInfo("Asia/Tokyo")
+    now_jst = datetime.now(JST).strftime("%Y-%m-%d %H:%M JST")
+
     articles = load_recent_articles()
-    update_index_html(articles)
+    update_index_html(articles, now_jst)
     msg = f"render_html: index.html 更新 {len(articles)}件"
     _append_job_log(msg)
     print(msg)

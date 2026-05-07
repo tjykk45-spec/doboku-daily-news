@@ -2,7 +2,7 @@ name: 土木 Daily News
 
 on:
   schedule:
-    - cron: '0 22 * * *'   # 毎日 07:00 JST（UTC 22:00 = JST 翌 07:00）
+    - cron: '0 13 * * *'   # 毎日 22:00 JST（UTC 13:00）→ 遅延8h以内でも翌朝6時には完了
   workflow_dispatch:       # 手動実行ボタン
 
 permissions:
