@@ -22,8 +22,8 @@ DATA_DIR = PROJECT_ROOT / "clips" / "data"
 LEAD_STORY_FILE = DATA_DIR / "_lead_story.json"
 INDEX_HTML = PROJECT_ROOT / "index.html"
 
-WINDOW_DAYS = 14
-NEW_DAYS = 2  # 直近 2 日以内の記事に NEW バッジを表示
+WINDOW_DAYS = 5
+NEW_DAYS = 1  # 直近 1 日以内の記事に NEW バッジを表示
 
 SECTION_ORDER = ["国交省・規制・政策", "技術・トレンド", "資材価格・コスト"]
 
@@ -81,6 +81,12 @@ _SVG_COPY = (
     ' stroke-linejoin="round"><rect x="9" y="9" width="13" height="13"'
     ' rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9'
     'a2 2 0 0 1 2 2v1"/></svg>'
+)
+_SVG_MAIL = (
+    '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"'
+    ' stroke="currentColor" stroke-width="2.4" stroke-linecap="round"'
+    ' stroke-linejoin="round"><rect x="2" y="4" width="20" height="16"'
+    ' rx="2"/><polyline points="2,4 12,13 22,4"/></svg>'
 )
 
 
@@ -209,6 +215,10 @@ def _render_card(art: dict, cat: str) -> str:
         f'            {_SVG_COPY}\n'
         f'            後追い用にコピー\n'
         f'          </button>\n'
+        f'          <button type="button" class="btn btn-mail js-mail-clip">\n'
+        f'            {_SVG_MAIL}\n'
+        f'            深掘り予約\n'
+        f'          </button>\n'
         f'        </div>\n'
         f'      </article>'
     )
@@ -328,6 +338,10 @@ def _render_lead_story(art: dict) -> str:
         f'          {_SVG_COPY}\n'
         f'          後追い用にコピー\n'
         f'        </button>\n'
+        f'        <button type="button" class="btn btn-mail js-mail-clip">\n'
+        f'          {_SVG_MAIL}\n'
+        f'          深掘り予約\n'
+        f'        </button>\n'
         f'      </div>\n'
         f'    </div>\n'
         f'    <!-- DAILY-NEWS:KOTOBA:END -->'
@@ -355,6 +369,11 @@ def _masthead_html(today: date, total: int, now_jst: str) -> str:
 def update_index_html(articles: list[dict], now_jst: str) -> None:
     today = date.today()
     html = INDEX_HTML.read_text(encoding="utf-8")
+
+    # title タグ更新（ブラウザタブに今日の日付を表示）
+    weekday = _JA_WEEKDAYS[today.weekday()]
+    title_str = f"土木 Daily News｜{today.month}月{today.day}日（{weekday}）"
+    html = re.sub(r"<title>.*?</title>", f"<title>{title_str}</title>", html)
 
     # masthead 更新
     html = re.sub(

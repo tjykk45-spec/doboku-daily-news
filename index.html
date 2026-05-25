@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>土木 Daily News — 朝刊</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23166534'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='sans-serif' fill='white'>土</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -593,6 +594,16 @@
       color: var(--ink);
       border-color: var(--accent);
       background: var(--accent-tint);
+    }
+    .btn-mail {
+      background: transparent;
+      color: oklch(0.40 0.10 55);
+      border-color: oklch(0.72 0.10 55);
+    }
+    .btn-mail:hover {
+      background: oklch(0.97 0.04 55);
+      border-color: oklch(0.55 0.12 55);
+      color: oklch(0.30 0.12 55);
     }
 
     /* lead-story actions */
@@ -2947,6 +2958,26 @@
           el.classList.remove('show');
         }, 2200);
       }
+
+      document.querySelectorAll('.js-mail-clip').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var card = btn.closest('.news-clip');
+          if (!card) return;
+          var title = card.getAttribute('data-clip-title') || '';
+          var url = card.getAttribute('data-clip-url') || '';
+          var date = card.getAttribute('data-clip-date') || '';
+          var lead = card.getAttribute('data-clip-lead') || '';
+          var subject = encodeURIComponent('【土木深掘り予約】' + title);
+          var body = encodeURIComponent(
+            '■ ' + title + '\n' +
+            '日付: ' + date + '\n' +
+            'URL: ' + url + '\n\n' +
+            '要約:\n' + lead + '\n\n' +
+            '---\n後でPCで確認する'
+          );
+          window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+        });
+      });
 
       document.querySelectorAll('.js-copy-clip').forEach(function (btn) {
         btn.addEventListener('click', function () {

@@ -28,7 +28,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "clips" / "data"
 LEAD_STORY_FILE = DATA_DIR / "_lead_story.json"
 
-_DEFAULT_WINDOW = 7   # 直近何日分の記事を候補にするか
+_DEFAULT_WINDOW = 5   # 直近何日分の記事を候補にするか（render_html.py の WINDOW_DAYS と合わせる）
 
 
 # ---------------------------------------------------------------------------
