@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "clips" / "data"
+LEAD_STORY_FILE = DATA_DIR / "_lead_story.json"
 INDEX_HTML = PROJECT_ROOT / "index.html"
 
 WINDOW_DAYS = 14
@@ -95,6 +96,8 @@ def load_recent_articles() -> list[dict]:
     seen_urls: set[str] = set()
     articles: list[dict] = []
     for p in sorted(DATA_DIR.glob("*.json"), reverse=True):
+        if p.name.startswith("_"):
+            continue  # _lead_story.json などの管理ファイルを除外
         try:
             art = json.loads(p.read_text(encoding="utf-8"))
             art_date = date.fromisoformat(art.get("date", "1900-01-01"))
@@ -251,6 +254,87 @@ def generate_sections_html(articles: list[dict]) -> str:
 
 
 # ---------------------------------------------------------------------------
+# 今日の一言（KOTOBA）関連
+# ---------------------------------------------------------------------------
+
+def load_lead_story_article(all_articles: list[dict]) -> dict | None:
+    """
+    _lead_story.json の URL に一致する記事を all_articles から探して返す。
+    ファイルがない・URLが見つからない場合は None。
+    """
+    if not LEAD_STORY_FILE.is_file():
+        return None
+    try:
+        lead = json.loads(LEAD_STORY_FILE.read_text(encoding="utf-8"))
+        target_url = lead.get("url", "")
+    except Exception:
+        return None
+    if not target_url:
+        return None
+    for art in all_articles:
+        if art.get("url", "") == target_url:
+            return art
+    return None
+
+
+def _render_lead_story(art: dict) -> str:
+    """lead-story div の HTML を生成する。"""
+    title = art.get("title", "")
+    url = art.get("url", "#")
+    art_date = art.get("date", "")
+    lead = art.get("lead", "")
+    bullets: list[str] = art.get("bullets", [])
+    tags: list[str] = art.get("tags", [])
+    source_name = art.get("source_name", "自動取得")
+
+    bullets_attr = "|".join(b.replace("|", "｜") for b in bullets if b)
+    tags_html = "".join(
+        f'      <span class="tag">{_t(tg)}</span>\n' for tg in tags
+    )
+    bullets_li = "".join(f"<li>{_t(b)}</li>" for b in bullets if b)
+    bullets_html = (
+        f'    <details class="dive">\n'
+        f'      <summary>深掘り・論点</summary>\n'
+        f'      <div class="body"><ul>{bullets_li}</ul></div>\n'
+        f'    </details>\n'
+    ) if bullets_li else ""
+
+    return (
+        f'    <!-- DAILY-NEWS:KOTOBA:START -->\n'
+        f'    <div\n'
+        f'      class="lead-story news-clip"\n'
+        f'      data-clip-title="{_e(title)}"\n'
+        f'      data-clip-url="{_e(url)}"\n'
+        f'      data-clip-section="今日の一言"\n'
+        f'      data-clip-date="{_e(art_date)}"\n'
+        f'      data-clip-lead="{_e(lead)}"\n'
+        f'      data-clip-bullets="{_e(bullets_attr)}"\n'
+        f'    >\n'
+        f'      <div class="lead-story-kicker">Lead Story ／ 今日の一言</div>\n'
+        f'      <h2>{_t(title)}</h2>\n'
+        f'      <p class="lead">{_t(lead)}</p>\n'
+        f'      <div class="lead-story-tags">\n'
+        f'{tags_html}'
+        f'      </div>\n'
+        f'{bullets_html}'
+        f'      <div class="source-line">{_t(source_name)} ／ {_t(art_date)}</div>\n'
+        f'      <div class="actions">\n'
+        f'        <a href="{_e(url)}" target="_blank" rel="noopener noreferrer"'
+        f' class="btn btn-primary">\n'
+        f'          {_SVG_EXTERNAL}\n'
+        f'          ソースを開く\n'
+        f'        </a>\n'
+        f'        <button type="button" class="btn btn-ghost js-copy-clip">\n'
+        f'          {_SVG_COPY}\n'
+        f'          後追い用にコピー\n'
+        f'        </button>\n'
+        f'      </div>\n'
+        f'    </div>\n'
+        f'    <!-- DAILY-NEWS:KOTOBA:END -->'
+    )
+
+
+# ---------------------------------------------------------------------------
 # index.html 更新
 # ---------------------------------------------------------------------------
 
@@ -279,6 +363,16 @@ def update_index_html(articles: list[dict], now_jst: str) -> None:
         html,
         flags=re.DOTALL,
     )
+
+    # 今日の一言（KOTOBA）更新
+    lead_art = load_lead_story_article(articles)
+    if lead_art:
+        html = re.sub(
+            r"<!-- DAILY-NEWS:KOTOBA:START -->.*?<!-- DAILY-NEWS:KOTOBA:END -->",
+            _render_lead_story(lead_art),
+            html,
+            flags=re.DOTALL,
+        )
 
     # セクション更新
     sections_html = generate_sections_html(articles)

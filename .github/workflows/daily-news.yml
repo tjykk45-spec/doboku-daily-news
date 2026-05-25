@@ -33,6 +33,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PYTHONUTF8: '1'
 
+      - name: 今日の一言選定（Gemini）
+        run: python scripts/pick_one.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONUTF8: '1'
+
       - name: デザイン適用（reference/design-preview.html → index.html CSS）
         run: python scripts/apply_design.py
 
