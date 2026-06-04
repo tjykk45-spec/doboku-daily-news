@@ -241,16 +241,24 @@ def ingest_one(watchlist: Path, skip_urls: set[str] | None = None) -> bool | Non
     return True
 
 
-def ingest_all(watchlist: Path) -> int:
-    """watchlist を全件処理する。失敗した URL はセッション内でスキップして次に進む。戻り値: 成功件数。"""
+def ingest_all(watchlist: Path, max_count: int = 10) -> int:
+    """watchlist を全件処理する。失敗した URL はセッション内でスキップして次に進む。
+    max_count: 1回の実行で処理する最大件数（デフォルト10件）。戻り値: 成功件数。"""
     skip_urls: set[str] = set()
     success_count = 0
-    while True:
+    attempt_count = 0
+    while attempt_count < max_count:
         result = ingest_one(watchlist, skip_urls)
         if result is None:
             break
+        attempt_count += 1
         if result is True:
             success_count += 1
+    if attempt_count >= max_count:
+        append_job_log(
+            date.today(),
+            f"ingest-all: 上限 {max_count} 件に達したため中断（残りは翌日処理）",
+        )
     return success_count
 
 

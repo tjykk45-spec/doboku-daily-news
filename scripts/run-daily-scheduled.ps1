@@ -49,5 +49,10 @@ if ($r3 -ne 0) {
     exit $r3
 }
 
+$r4 = Invoke-DailyStep 'scripts\tts_generate.py'
+if ($r4 -ne 0) {
+    Write-Warning "tts_generate.py が終了コード $r4 で終了しました（音声生成/アップロード失敗。clips/log を参照）。"
+}
+
 # index.html が更新できればジョブ成功（RSS/ingest の警告はログで確認）
 exit 0
