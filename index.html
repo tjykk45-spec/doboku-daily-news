@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
@@ -225,36 +225,40 @@
     .tab-btn {
       padding: 7px 16px;
       border-radius: 20px;
-      border: 1.5px solid var(--rule);
+      border: 2px solid transparent;
       font-size: 0.82rem;
       font-weight: 600;
-      color: var(--ink-2);
-      background: var(--bg);
+      color: #fff;
       text-decoration: none;
       white-space: nowrap;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      box-shadow: 0 2px 6px oklch(0.22 0.04 265 / 0.14);
+      transition: background 0.15s, color 0.15s, border-color 0.15s, filter 0.15s;
+      position: relative;
     }
-    .tab-btn[data-theme="green"]:hover,
-    .tab-btn.active[data-theme="green"] {
-      border-color: var(--green-edge);
-      color: var(--green-2);
-      background: var(--green-tint);
+    .tab-btn[data-theme="green"] {
+      background: oklch(0.44 0.10 148);
+      border-color: oklch(0.36 0.10 148);
     }
-    .tab-btn[data-theme="main"]:hover,
-    .tab-btn.active[data-theme="main"] {
-      border-color: var(--main-edge);
-      color: var(--main-2);
-      background: var(--main-tint);
+    .tab-btn[data-theme="main"] {
+      background: oklch(0.46 0.12 278);
+      border-color: oklch(0.38 0.12 278);
     }
-    .tab-btn[data-theme="pink"]:hover,
-    .tab-btn.active[data-theme="pink"] {
-      border-color: var(--pink-edge);
-      color: var(--pink-2);
-      background: var(--pink-tint);
+    .tab-btn[data-theme="pink"] {
+      background: oklch(0.52 0.12 350);
+      border-color: oklch(0.44 0.12 350);
     }
-    .tab-btn.active[data-theme="green"] { border-color: var(--green); }
-    .tab-btn.active[data-theme="main"]  { border-color: var(--main);  }
-    .tab-btn.active[data-theme="pink"]  { border-color: var(--pink);  }
+    .tab-btn:hover { filter: brightness(1.15); }
+    .tab-btn.active { filter: brightness(1.0); box-shadow: 0 3px 10px oklch(0.22 0.04 265 / 0.22); }
+    .tab-btn.active[data-theme="green"] { background: oklch(0.40 0.12 148); border-color: oklch(0.32 0.12 148); }
+    .tab-btn.active[data-theme="main"]  { background: oklch(0.42 0.14 278); border-color: oklch(0.34 0.14 278); }
+    .tab-btn.active[data-theme="pink"]  { background: oklch(0.48 0.14 350); border-color: oklch(0.40 0.14 350); }
+    .tab-new-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-left: 5px; padding: 1px 5px; border-radius: 7px;
+      background: oklch(0.92 0.02 85); color: oklch(0.38 0.12 25);
+      font-size: 9px; font-weight: 800; letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
 
     /* ───────────── LEAD STORY ───────────── */
     .lead-story {
@@ -1673,6 +1677,31 @@
         });
       }, { rootMargin: '-35% 0px -60% 0px' });
       sections.forEach(function (s) { obs.observe(s); });
+    })();
+
+    // セクションに新着記事があればタブに NEW バッジを追加
+    (function () {
+      var NEW_WINDOW_DAYS = 7;
+      var now = Date.now();
+      var secToTab = { 'sec-policy': '[href="#sec-policy"]', 'sec-tech': '[href="#sec-tech"]', 'sec-cost': '[href="#sec-cost"]' };
+      Object.keys(secToTab).forEach(function (secId) {
+        var sec = document.getElementById(secId);
+        if (!sec) return;
+        var cards = sec.querySelectorAll('[data-clip-date]');
+        var hasNew = Array.prototype.some.call(cards, function (card) {
+          var d = card.getAttribute('data-clip-date');
+          if (!d) return false;
+          return (now - new Date(d).getTime()) <= NEW_WINDOW_DAYS * 86400000;
+        });
+        if (!hasNew) return;
+        var tab = document.querySelector('.tab-btn' + secToTab[secId]);
+        if (tab && !tab.querySelector('.tab-new-badge')) {
+          var badge = document.createElement('span');
+          badge.className = 'tab-new-badge';
+          badge.textContent = 'NEW';
+          tab.appendChild(badge);
+        }
+      });
     })();
   </script>
 </body>

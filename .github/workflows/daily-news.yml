@@ -45,10 +45,13 @@ jobs:
       - name: index.html 生成
         run: python scripts/render_html.py
 
+      - name: 音声生成（MP3）
+        run: python scripts/tts_generate.py --no-drive
+
       - name: 変更をコミット・プッシュ
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add clips/data/ clips/log/ index.html
+          git add clips/data/ clips/log/ clips/audio/ index.html
           git diff --staged --quiet || git commit -m "chore: 土木 Daily News 自動更新 $(date -u '+%Y-%m-%d')"
           git push
