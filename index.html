@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土木 Daily News｜6月27日（土）</title>
+  <title>土木 Daily News｜6月29日（月）</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23166534'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='sans-serif' fill='white'>土</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -225,40 +225,36 @@
     .tab-btn {
       padding: 7px 16px;
       border-radius: 20px;
-      border: 2px solid transparent;
+      border: 1.5px solid var(--rule);
       font-size: 0.82rem;
       font-weight: 600;
-      color: #fff;
+      color: var(--ink-2);
+      background: var(--bg);
       text-decoration: none;
       white-space: nowrap;
-      box-shadow: 0 2px 6px oklch(0.22 0.04 265 / 0.14);
-      transition: background 0.15s, color 0.15s, border-color 0.15s, filter 0.15s;
-      position: relative;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
-    .tab-btn[data-theme="green"] {
-      background: oklch(0.44 0.10 148);
-      border-color: oklch(0.36 0.10 148);
+    .tab-btn[data-theme="green"]:hover,
+    .tab-btn.active[data-theme="green"] {
+      border-color: var(--green-edge);
+      color: var(--green-2);
+      background: var(--green-tint);
     }
-    .tab-btn[data-theme="main"] {
-      background: oklch(0.46 0.12 278);
-      border-color: oklch(0.38 0.12 278);
+    .tab-btn[data-theme="main"]:hover,
+    .tab-btn.active[data-theme="main"] {
+      border-color: var(--main-edge);
+      color: var(--main-2);
+      background: var(--main-tint);
     }
-    .tab-btn[data-theme="pink"] {
-      background: oklch(0.52 0.12 350);
-      border-color: oklch(0.44 0.12 350);
+    .tab-btn[data-theme="pink"]:hover,
+    .tab-btn.active[data-theme="pink"] {
+      border-color: var(--pink-edge);
+      color: var(--pink-2);
+      background: var(--pink-tint);
     }
-    .tab-btn:hover { filter: brightness(1.15); }
-    .tab-btn.active { filter: brightness(1.0); box-shadow: 0 3px 10px oklch(0.22 0.04 265 / 0.22); }
-    .tab-btn.active[data-theme="green"] { background: oklch(0.40 0.12 148); border-color: oklch(0.32 0.12 148); }
-    .tab-btn.active[data-theme="main"]  { background: oklch(0.42 0.14 278); border-color: oklch(0.34 0.14 278); }
-    .tab-btn.active[data-theme="pink"]  { background: oklch(0.48 0.14 350); border-color: oklch(0.40 0.14 350); }
-    .tab-new-badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      margin-left: 5px; padding: 1px 5px; border-radius: 7px;
-      background: oklch(0.92 0.02 85); color: oklch(0.38 0.12 25);
-      font-size: 9px; font-weight: 800; letter-spacing: 0.04em;
-      vertical-align: middle;
-    }
+    .tab-btn.active[data-theme="green"] { border-color: var(--green); }
+    .tab-btn.active[data-theme="main"]  { border-color: var(--main);  }
+    .tab-btn.active[data-theme="pink"]  { border-color: var(--pink);  }
 
     /* ───────────── LEAD STORY ───────────── */
     .lead-story {
@@ -797,11 +793,11 @@
       </h1>
       <div class="masthead-foot">
         <!-- DAILY-NEWS:MASTHEAD:START -->
-        <time datetime="2026-06-27">2026年6月27日（土）</time>
+        <time datetime="2026-06-29">2026年6月29日（月）</time>
         <span class="sep">·</span>
-        <span class="pill">本日のピックアップ <strong>16</strong> 件</span>
+        <span class="pill">本日のピックアップ <strong>10</strong> 件</span>
         <span class="sep">·</span>
-        <span class="last-updated">最終更新: 2026-06-27 23:46 JST</span>
+        <span class="last-updated">最終更新: 2026-06-30 01:40 JST</span>
         <!-- DAILY-NEWS:MASTHEAD:END -->
       </div>
     </header>
@@ -814,32 +810,31 @@
     </nav>
 
     <!-- ───────────── 今日の一言（LEAD STORY） ───────────── -->
-                                                            <!-- DAILY-NEWS:KOTOBA:START -->
+                                                                <!-- DAILY-NEWS:KOTOBA:START -->
     <div
       class="lead-story news-clip"
-      data-clip-title="直轄工事で中東情勢踏まえた運用 設計変更への対応柔軟に、国土交通省"
-      data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02680/"
+      data-clip-title="設計ミスで河川構造物を全て造り直し、設計者が全額負担 広島県の砂防工事"
+      data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02690/"
       data-clip-section="今日の一言"
-      data-clip-date="2026-06-22"
-      data-clip-lead="不透明な中東情勢に起因するナフサ由来建設資材の調達難に対し、国土交通省は直轄工事で受注者の設計変更に柔軟に対応する運用を導入しました。これは、全ての資材を対象とするスライド条項とは別に適用されます。(本文未取得のため見出しとリードのみ)"
-      data-clip-bullets="不透明な中東情勢を背景に、ナフサを由来とする建設資材の調達難が生じています。|国土交通省は、直轄工事において受注者の設計変更に柔軟に対応する運用を導入しました。|この運用は、全ての資材を対象とする既存のスライド条項とは別に適用される方針です。"
+      data-clip-date="2026-06-29"
+      data-clip-lead="広島県が発注した砂防工事において設計ミスが判明し、完成済みの河川構造物全てを造り直すことになりました。越流水深の設定誤りが原因で、再構築費用は設計者が全額負担します。"
+      data-clip-bullets="広島県発注の砂防工事で、設計上の越流水深が本来より0.2m低く設定されていたため、構造物の強度が不足しました。|完成した河川構造物全てを造り直すことになり、これに要する費用は設計者であるアース開発コンサルタントが全額負担します。|この設計ミスは2026年2月頃に判明しました。"
     >
       <div class="lead-story-kicker">Lead Story ／ 今日の一言</div>
-      <h2>直轄工事で中東情勢踏まえた運用 設計変更への対応柔軟に、国土交通省</h2>
-      <p class="lead">不透明な中東情勢に起因するナフサ由来建設資材の調達難に対し、国土交通省は直轄工事で受注者の設計変更に柔軟に対応する運用を導入しました。これは、全ての資材を対象とするスライド条項とは別に適用されます。(本文未取得のため見出しとリードのみ)</p>
+      <h2>設計ミスで河川構造物を全て造り直し、設計者が全額負担 広島県の砂防工事</h2>
+      <p class="lead">広島県が発注した砂防工事において設計ミスが判明し、完成済みの河川構造物全てを造り直すことになりました。越流水深の設定誤りが原因で、再構築費用は設計者が全額負担します。</p>
       <div class="lead-story-tags">
       <span class="tag">#国交省</span>
-      <span class="tag">#政策</span>
-      <span class="tag">#規制</span>
-      <span class="tag">#資材価格</span>
+      <span class="tag">#発注</span>
+      <span class="tag">#継続ウォッチ</span>
       </div>
     <details class="dive">
       <summary>深掘り・論点</summary>
-      <div class="body"><ul><li>不透明な中東情勢を背景に、ナフサを由来とする建設資材の調達難が生じています。</li><li>国土交通省は、直轄工事において受注者の設計変更に柔軟に対応する運用を導入しました。</li><li>この運用は、全ての資材を対象とする既存のスライド条項とは別に適用される方針です。</li></ul></div>
+      <div class="body"><ul><li>広島県発注の砂防工事で、設計上の越流水深が本来より0.2m低く設定されていたため、構造物の強度が不足しました。</li><li>完成した河川構造物全てを造り直すことになり、これに要する費用は設計者であるアース開発コンサルタントが全額負担します。</li><li>この設計ミスは2026年2月頃に判明しました。</li></ul></div>
     </details>
-      <div class="source-line">自動取得 ／ 2026-06-22</div>
+      <div class="source-line">自動取得 ／ 2026-06-29</div>
       <div class="actions">
-        <a href="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02680/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <a href="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02690/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           ソースを開く
         </a>
@@ -914,33 +909,33 @@
           <span class="num">SEC.02</span>
           <h2>国交省・規制・政策動向</h2>
         </div>
-        <span class="meta">Policy ／ 2 件</span>
+        <span class="meta">Policy ／ 7 件</span>
       </div>
 
       <article
         class="card news-clip"
-        data-clip-title="熱中症死亡者が多い中小建設現場、現場の知恵で乗り切る暑熱対策"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00265/061200005/"
+        data-clip-title="設計ミスで河川構造物を全て造り直し、設計者が全額負担 広島県の砂防工事"
+        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02690/"
         data-clip-section="国交省・規制・政策"
-        data-clip-date="2026-06-22"
-        data-clip-lead="建設業で発生する熱中症死亡者の90%強が小規模事業場に集中しており、中小建設現場での暑熱対策が喫緊の課題です。大手現場で対策が進む中、中小現場では簡易休憩所の設置やプレクーリング、ウェアラブルデバイスの活用が対策の鍵だと指摘されています。"
-        data-clip-bullets="熱中症死亡者数の90%強が、建設業の20人未満の小規模事業場で発生しており、大手に比べ対策が遅れています。|労働安全衛生総合研究所ばく露評価研究部の齊藤宏之部長は、足場材や遮光ネットを組み合わせた簡易な休憩所の確保を推奨しています。|プレクーリングや暑熱順化、ウェアラブルデバイスによる他己管理も、中小現場で取り組むべき暑熱対策として挙げられています。"
+        data-clip-date="2026-06-29"
+        data-clip-lead="広島県が発注した砂防工事において設計ミスが判明し、完成済みの河川構造物全てを造り直すことになりました。越流水深の設定誤りが原因で、再構築費用は設計者が全額負担します。"
+        data-clip-bullets="広島県発注の砂防工事で、設計上の越流水深が本来より0.2m低く設定されていたため、構造物の強度が不足しました。|完成した河川構造物全てを造り直すことになり、これに要する費用は設計者であるアース開発コンサルタントが全額負担します。|この設計ミスは2026年2月頃に判明しました。"
       >
         <div class="kicker">
           <span class="cat">Policy</span>
           <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="観測">観測</span>
+          <span class="date">2026.06.29</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="確定">確定</span>
         </div>
-        <h3>熱中症死亡者が多い中小建設現場、現場の知恵で乗り切る暑熱対策</h3>
-        <p class="lead">建設業で発生する熱中症死亡者の90%強が小規模事業場に集中しており、中小建設現場での暑熱対策が喫緊の課題です。大手現場で対策が進む中、中小現場では簡易休憩所の設置やプレクーリング、ウェアラブルデバイスの活用が対策の鍵だと指摘されています。</p>
+        <h3>設計ミスで河川構造物を全て造り直し、設計者が全額負担 広島県の砂防工事</h3>
+        <p class="lead">広島県が発注した砂防工事において設計ミスが判明し、完成済みの河川構造物全てを造り直すことになりました。越流水深の設定誤りが原因で、再構築費用は設計者が全額負担します。</p>
         <details class="dive">
           <summary>深掘り</summary>
-          <div class="body"><ul><li>熱中症死亡者数の90%強が、建設業の20人未満の小規模事業場で発生しており、大手に比べ対策が遅れています。</li><li>労働安全衛生総合研究所ばく露評価研究部の齊藤宏之部長は、足場材や遮光ネットを組み合わせた簡易な休憩所の確保を推奨しています。</li><li>プレクーリングや暑熱順化、ウェアラブルデバイスによる他己管理も、中小現場で取り組むべき暑熱対策として挙げられています。</li></ul></div>
+          <div class="body"><ul><li>広島県発注の砂防工事で、設計上の越流水深が本来より0.2m低く設定されていたため、構造物の強度が不足しました。</li><li>完成した河川構造物全てを造り直すことになり、これに要する費用は設計者であるアース開発コンサルタントが全額負担します。</li><li>この設計ミスは2026年2月頃に判明しました。</li></ul></div>
         </details>
-        <div class="tags"><span class="tag">#政策</span><span class="tag">#DX</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
+        <div class="tags"><span class="tag">#国交省</span><span class="tag">#発注</span><span class="tag">#継続ウォッチ</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-29</div>
         <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00265/061200005/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02690/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             ソースを開く
           </a>
@@ -956,28 +951,213 @@
       </article>
       <article
         class="card news-clip"
-        data-clip-title="直轄工事で中東情勢踏まえた運用 設計変更への対応柔軟に、国土交通省"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02680/"
+        data-clip-title="1位は「下水道管に遮られトンネル掘削中止、大失態の責任は発注者か受注者か」"
+        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/00674/031200371/"
         data-clip-section="国交省・規制・政策"
-        data-clip-date="2026-06-22"
-        data-clip-lead="不透明な中東情勢に起因するナフサ由来建設資材の調達難に対し、国土交通省は直轄工事で受注者の設計変更に柔軟に対応する運用を導入しました。これは、全ての資材を対象とするスライド条項とは別に適用されます。(本文未取得のため見出しとリードのみ)"
-        data-clip-bullets="不透明な中東情勢を背景に、ナフサを由来とする建設資材の調達難が生じています。|国土交通省は、直轄工事において受注者の設計変更に柔軟に対応する運用を導入しました。|この運用は、全ての資材を対象とする既存のスライド条項とは別に適用される方針です。"
+        data-clip-date="2026-06-29"
+        data-clip-lead="日経クロステック土木面で、下水道管が原因でトンネル掘削が中止された事態における発注者と受注者の責任の所在について、過去記事のランキング形式で報じられています。(本文未取得のため見出しとリードのみ)"
+        data-clip-bullets="記事は、過去に公開された「下水道管に遮られトンネル掘削中止、大失態の責任は発注者か受注者か」という記事がランキング1位として紹介されています。|本文は会員限定のため、記事の具体的な内容は現時点では不明です。|記事の関連キーワードとして、「トンネル」「管路」「裁判」が挙げられています。"
       >
         <div class="kicker">
           <span class="cat">Policy</span>
           <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="確定">確定</span>
+          <span class="date">2026.06.29</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="観測">観測</span>
         </div>
-        <h3>直轄工事で中東情勢踏まえた運用 設計変更への対応柔軟に、国土交通省</h3>
-        <p class="lead">不透明な中東情勢に起因するナフサ由来建設資材の調達難に対し、国土交通省は直轄工事で受注者の設計変更に柔軟に対応する運用を導入しました。これは、全ての資材を対象とするスライド条項とは別に適用されます。(本文未取得のため見出しとリードのみ)</p>
+        <h3>1位は「下水道管に遮られトンネル掘削中止、大失態の責任は発注者か受注者か」</h3>
+        <p class="lead">日経クロステック土木面で、下水道管が原因でトンネル掘削が中止された事態における発注者と受注者の責任の所在について、過去記事のランキング形式で報じられています。(本文未取得のため見出しとリードのみ)</p>
         <details class="dive">
           <summary>深掘り</summary>
-          <div class="body"><ul><li>不透明な中東情勢を背景に、ナフサを由来とする建設資材の調達難が生じています。</li><li>国土交通省は、直轄工事において受注者の設計変更に柔軟に対応する運用を導入しました。</li><li>この運用は、全ての資材を対象とする既存のスライド条項とは別に適用される方針です。</li></ul></div>
+          <div class="body"><ul><li>記事は、過去に公開された「下水道管に遮られトンネル掘削中止、大失態の責任は発注者か受注者か」という記事がランキング1位として紹介されています。</li><li>本文は会員限定のため、記事の具体的な内容は現時点では不明です。</li><li>記事の関連キーワードとして、「トンネル」「管路」「裁判」が挙げられています。</li></ul></div>
         </details>
-        <div class="tags"><span class="tag">#国交省</span><span class="tag">#政策</span><span class="tag">#規制</span><span class="tag">#資材価格</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
+        <div class="tags"><span class="tag">#発注</span><span class="tag">#継続ウォッチ</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-29</div>
         <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/00142/02680/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/00674/031200371/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost js-copy-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            後追い用にコピー
+          </button>
+          <button type="button" class="btn btn-mail js-mail-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            深掘り予約
+          </button>
+        </div>
+      </article>
+      <article
+        class="card news-clip"
+        data-clip-title="国交省、土砂・流木考慮中小河川水害リスク評価技術検討会"
+        data-clip-url="https://www.decn.co.jp/?p=185588"
+        data-clip-section="国交省・規制・政策"
+        data-clip-date="2026-06-28"
+        data-clip-lead="国土交通省は、土砂や流木を考慮した中小河川の水害リスク評価技術について検討会を開催する予定です。この検討会は2026年6月30日に中央合同庁舎3号館で開催されます。"
+        data-clip-bullets="国土交通省が「土砂・流木考慮中小河川水害リスク評価技術検討会」を開催します。|検討会は2026年6月30日に中央合同庁舎3号館で開催される予定です。"
+      >
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.06.28</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>国交省、土砂・流木考慮中小河川水害リスク評価技術検討会</h3>
+        <p class="lead">国土交通省は、土砂や流木を考慮した中小河川の水害リスク評価技術について検討会を開催する予定です。この検討会は2026年6月30日に中央合同庁舎3号館で開催されます。</p>
+        <details class="dive">
+          <summary>深掘り</summary>
+          <div class="body"><ul><li>国土交通省が「土砂・流木考慮中小河川水害リスク評価技術検討会」を開催します。</li><li>検討会は2026年6月30日に中央合同庁舎3号館で開催される予定です。</li></ul></div>
+        </details>
+        <div class="tags"><span class="tag">#国交省</span><span class="tag">#政策</span><span class="tag">#災害</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-28</div>
+        <div class="actions">
+          <a href="https://www.decn.co.jp/?p=185588" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost js-copy-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            後追い用にコピー
+          </button>
+          <button type="button" class="btn btn-mail js-mail-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            深掘り予約
+          </button>
+        </div>
+      </article>
+      <article
+        class="card news-clip"
+        data-clip-title="国交省、地下水適正保全・利用検討会"
+        data-clip-url="https://www.decn.co.jp/?p=185594"
+        data-clip-section="国交省・規制・政策"
+        data-clip-date="2026-06-28"
+        data-clip-lead="国土交通省は、2026年6月30日に中央合同庁舎3号館で「地下水適正保全・利用検討会」を開催する予定です（本文未取得のため見出しとリードのみ）。"
+        data-clip-bullets="国土交通省が主催する検討会である。|2026年6月30日に開催される予定である。|東京都千代田区の中央合同庁舎3号館で開催される。"
+      >
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.06.28</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>国交省、地下水適正保全・利用検討会</h3>
+        <p class="lead">国土交通省は、2026年6月30日に中央合同庁舎3号館で「地下水適正保全・利用検討会」を開催する予定です（本文未取得のため見出しとリードのみ）。</p>
+        <details class="dive">
+          <summary>深掘り</summary>
+          <div class="body"><ul><li>国土交通省が主催する検討会である。</li><li>2026年6月30日に開催される予定である。</li><li>東京都千代田区の中央合同庁舎3号館で開催される。</li></ul></div>
+        </details>
+        <div class="tags"><span class="tag">#国交省</span><span class="tag">#政策</span><span class="tag">#継続ウォッチ</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-28</div>
+        <div class="actions">
+          <a href="https://www.decn.co.jp/?p=185594" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost js-copy-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            後追い用にコピー
+          </button>
+          <button type="button" class="btn btn-mail js-mail-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            深掘り予約
+          </button>
+        </div>
+      </article>
+      <article
+        class="card news-clip"
+        data-clip-title="アフリカ・インフラ協議会総会"
+        data-clip-url="https://www.decn.co.jp/?p=185584"
+        data-clip-section="国交省・規制・政策"
+        data-clip-date="2026-06-28"
+        data-clip-lead="アフリカ・インフラ協議会の総会が、2026年6月29日に中央合同庁舎2号館で開催される予定です。(本文未取得のため見出しとリードのみ)"
+        data-clip-bullets="アフリカ・インフラ協議会総会は、2026年6月29日に東京都千代田区の中央合同庁舎2号館で開催されます。"
+      >
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.06.28</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>アフリカ・インフラ協議会総会</h3>
+        <p class="lead">アフリカ・インフラ協議会の総会が、2026年6月29日に中央合同庁舎2号館で開催される予定です。(本文未取得のため見出しとリードのみ)</p>
+        <details class="dive">
+          <summary>深掘り</summary>
+          <div class="body"><ul><li>アフリカ・インフラ協議会総会は、2026年6月29日に東京都千代田区の中央合同庁舎2号館で開催されます。</li></ul></div>
+        </details>
+        <div class="tags"><span class="tag">#国交省</span><span class="tag">#政策</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-28</div>
+        <div class="actions">
+          <a href="https://www.decn.co.jp/?p=185584" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost js-copy-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            後追い用にコピー
+          </button>
+          <button type="button" class="btn btn-mail js-mail-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            深掘り予約
+          </button>
+        </div>
+      </article>
+      <article
+        class="card news-clip"
+        data-clip-title="国交省、海外インフラプロジェクト技術者評価委"
+        data-clip-url="https://www.decn.co.jp/?p=185590"
+        data-clip-section="国交省・規制・政策"
+        data-clip-date="2026-06-28"
+        data-clip-lead="国土交通省は、「海外インフラプロジェクト技術者評価委員会」のウェブ会議を2026年6月30日に開催する予定です。(本文未取得のため見出しとリードのみ)"
+        data-clip-bullets="国土交通省が「海外インフラプロジェクト技術者評価委員会」を開催します。|会議はウェブ形式で、2026年6月30日に行われる予定です。"
+      >
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.06.28</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>国交省、海外インフラプロジェクト技術者評価委</h3>
+        <p class="lead">国土交通省は、「海外インフラプロジェクト技術者評価委員会」のウェブ会議を2026年6月30日に開催する予定です。(本文未取得のため見出しとリードのみ)</p>
+        <details class="dive">
+          <summary>深掘り</summary>
+          <div class="body"><ul><li>国土交通省が「海外インフラプロジェクト技術者評価委員会」を開催します。</li><li>会議はウェブ形式で、2026年6月30日に行われる予定です。</li></ul></div>
+        </details>
+        <div class="tags"><span class="tag">#国交省</span><span class="tag">#政策</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-28</div>
+        <div class="actions">
+          <a href="https://www.decn.co.jp/?p=185590" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ソースを開く
+          </a>
+          <button type="button" class="btn btn-ghost js-copy-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            後追い用にコピー
+          </button>
+          <button type="button" class="btn btn-mail js-mail-clip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            深掘り予約
+          </button>
+        </div>
+      </article>
+      <article
+        class="card news-clip"
+        data-clip-title="国交省、建設資材需要連絡会合同会議"
+        data-clip-url="https://www.decn.co.jp/?p=185592"
+        data-clip-section="国交省・規制・政策"
+        data-clip-date="2026-06-28"
+        data-clip-lead="国交省は2026年6月30日に建設資材需要連絡会合同会議をウェブ開催する予定です (本文未取得のため見出しとリードのみ)。"
+        data-clip-bullets="会議は2026年6月30日にウェブ形式で開催されます。|具体的な議題や協議内容についての詳細は本文に記載がありません。"
+      >
+        <div class="kicker">
+          <span class="cat">Policy</span>
+          <span>·</span>
+          <span class="date">2026.06.28</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="観測">観測</span>
+        </div>
+        <h3>国交省、建設資材需要連絡会合同会議</h3>
+        <p class="lead">国交省は2026年6月30日に建設資材需要連絡会合同会議をウェブ開催する予定です (本文未取得のため見出しとリードのみ)。</p>
+        <details class="dive">
+          <summary>深掘り</summary>
+          <div class="body"><ul><li>会議は2026年6月30日にウェブ形式で開催されます。</li><li>具体的な議題や協議内容についての詳細は本文に記載がありません。</li></ul></div>
+        </details>
+        <div class="tags"><span class="tag">#国交省</span><span class="tag">#資材価格</span><span class="tag">#継続ウォッチ</span></div>
+        <div class="source-line">自動取得 ／ 2026-06-28</div>
+        <div class="actions">
+          <a href="https://www.decn.co.jp/?p=185592" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             ソースを開く
           </a>
@@ -999,7 +1179,7 @@
           <span class="num">SEC.03</span>
           <h2>技術・トレンド</h2>
         </div>
-        <span class="meta">Tech ／ 13 件</span>
+        <span class="meta">Tech ／ 3 件</span>
       </div>
       <p class="sec-sub"><strong>建築・土木共通</strong>で追うトピック（i-Construction、現場の自動運転・自律機械、BIM/CIM など）をここにまとめます。</p>
 
@@ -1015,7 +1195,7 @@
         <div class="kicker">
           <span class="cat">Tech</span>
           <span>·</span>
-          <span class="date">2026.06.26</span> <span class="badge-new">NEW</span> <span class="badge-maturity" data-maturity="確定">確定</span>
+          <span class="date">2026.06.26</span> <span class="badge-maturity" data-maturity="確定">確定</span>
         </div>
         <h3>清水建設　大分の山岳トンネルで自動化施工、作業員を5人から3人へ</h3>
         <p class="lead">清水建設は、大分県中津市で施工中の山岳トンネルに「シミズ・スマート・トンネル」を適用し、自動化施工により作業員数を従来の最大5人から最大3人へと削減しました。</p>
@@ -1114,376 +1294,6 @@
           </button>
         </div>
       </article>
-      <article
-        class="card news-clip"
-        data-clip-title="酷暑の草刈り」や「過酷な除雪」を自動化、担い手不足の解消へ"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/03639/060900007/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-23"
-        data-clip-lead="道路や河川の維持管理において、草刈りや除雪などの業務でロボット活用が拡大しています。担い手不足や作業環境の劣悪化といった課題の解決策として、期待を集めています。"
-        data-clip-bullets="国土交通省関東地方整備局江戸川河川事務所は、2026年5月7日に自律走行する草刈りロボットの試験走行を公開しました。|金杉建設が開発の中心となるロボットは、埼玉県三郷市内を流れる江戸川の河川敷で、傾斜のある堤防の草刈り作業を無人自律走行で実施しました。|維持管理業務へのロボット導入は、酷暑下の草刈りや過酷な除雪作業といった現場における担い手不足や劣悪な作業環境の改善に貢献すると期待されています。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.23</span> <span class="badge-maturity" data-maturity="観測">観測</span>
-        </div>
-        <h3>酷暑の草刈り」や「過酷な除雪」を自動化、担い手不足の解消へ</h3>
-        <p class="lead">道路や河川の維持管理において、草刈りや除雪などの業務でロボット活用が拡大しています。担い手不足や作業環境の劣悪化といった課題の解決策として、期待を集めています。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>国土交通省関東地方整備局江戸川河川事務所は、2026年5月7日に自律走行する草刈りロボットの試験走行を公開しました。</li><li>金杉建設が開発の中心となるロボットは、埼玉県三郷市内を流れる江戸川の河川敷で、傾斜のある堤防の草刈り作業を無人自律走行で実施しました。</li><li>維持管理業務へのロボット導入は、酷暑下の草刈りや過酷な除雪作業といった現場における担い手不足や劣悪な作業環境の改善に貢献すると期待されています。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#i-Construction</span><span class="tag">#国交省</span><span class="tag">#地方整備局</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-23</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/03639/060900007/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="大成建設「ゼロカーボン」ビジネス化への一歩、ZEB展開の手法を踏襲"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/03651/061700004/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-23"
-        data-clip-lead="大成建設は、脱炭素技術の開発に積極的であり、埼玉県幸手市に運用中の次世代技術研究所「T-FIELD／SATTE」をゼロカーボンビル（ZCB）の社会実装拠点として位置付けています。同社技術センター長へのインタビューで、その戦略が明かされました。"
-        data-clip-bullets="大成建設グループは、中期経営計画（2024-2026）において、T-FIELD／SATTEをゼロカーボンビル（ZCB）実現に向けた社会・環境問題対応の目玉の一つと位置付け、その社会実装を推進する方針です。|T-FIELD／SATTEは、革新的な技術や材料の研究・実証から社会実装への展開拠点として、特に道路関係の研究に注力し、道路材料の実証や製造の大規模化ノウハウ収集を重点的に進めます。|材料開発を専門とする大成ロテック技術研究所と連携し、T-FIELD／SATTEが実証と大規模化ノウハウ収集を担うことで、脱炭素技術の事業化加速が期待されます。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.23</span> <span class="badge-maturity" data-maturity="提言">提言</span>
-        </div>
-        <h3>大成建設「ゼロカーボン」ビジネス化への一歩、ZEB展開の手法を踏襲</h3>
-        <p class="lead">大成建設は、脱炭素技術の開発に積極的であり、埼玉県幸手市に運用中の次世代技術研究所「T-FIELD／SATTE」をゼロカーボンビル（ZCB）の社会実装拠点として位置付けています。同社技術センター長へのインタビューで、その戦略が明かされました。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>大成建設グループは、中期経営計画（2024-2026）において、T-FIELD／SATTEをゼロカーボンビル（ZCB）実現に向けた社会・環境問題対応の目玉の一つと位置付け、その社会実装を推進する方針です。</li><li>T-FIELD／SATTEは、革新的な技術や材料の研究・実証から社会実装への展開拠点として、特に道路関係の研究に注力し、道路材料の実証や製造の大規模化ノウハウ収集を重点的に進めます。</li><li>材料開発を専門とする大成ロテック技術研究所と連携し、T-FIELD／SATTEが実証と大規模化ノウハウ収集を担うことで、脱炭素技術の事業化加速が期待されます。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#セメント</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-23</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/03651/061700004/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="「勝ち抜く自信ある」、フィジカルAIで米中と異なる青写真 安川電機子会社"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/03520/061900013/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="AIの次なる主戦場とされる「フィジカルAI」分野において、安川電機の子会社であるロボティック・バイオロジー・インスティテュートの松熊研司社長が、米中とは異なる戦略で「勝ち抜く自信がある」と述べました。(本文未取得のため見出しとリードのみ)"
-        data-clip-bullets="フィジカルAIはAIの次なる主戦場として注目されており、人型ロボットを中心に米中が激しい開発競争を繰り広げています。|安川電機の子会社であるロボティック・バイオロジー・インスティテュートは、独自の青写真でこの競争に挑む意向を示しています。|(本文未取得のため、具体的な戦略や計画の詳細は不明です)"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="提言">提言</span> <span class="badge-scope-out">スコープ外参考</span>
-        </div>
-        <h3>「勝ち抜く自信ある」、フィジカルAIで米中と異なる青写真 安川電機子会社</h3>
-        <p class="lead">AIの次なる主戦場とされる「フィジカルAI」分野において、安川電機の子会社であるロボティック・バイオロジー・インスティテュートの松熊研司社長が、米中とは異なる戦略で「勝ち抜く自信がある」と述べました。(本文未取得のため見出しとリードのみ)</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>フィジカルAIはAIの次なる主戦場として注目されており、人型ロボットを中心に米中が激しい開発競争を繰り広げています。</li><li>安川電機の子会社であるロボティック・バイオロジー・インスティテュートは、独自の青写真でこの競争に挑む意向を示しています。</li><li>(本文未取得のため、具体的な戦略や計画の詳細は不明です)</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/03520/061900013/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="環境フレンドリーＨＤ／苫小牧ＡＩＤＣ特高受変電設備建設工事／ユアテックに"
-        data-clip-url="https://www.decn.co.jp/?p=185412"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="環境フレンドリーHDの子会社ATTは、苫小牧AIデータセンター向け特高受変電設備の建設工事契約をユアテックと39億3800万円（税込み）で締結。2027年12月13日の完成を予定しています。"
-        data-clip-bullets="環境フレンドリーHDの子会社AI Tech Tomakomaiが、北海道苫小牧市で進める次世代AIデータセンター「苫小牧AIDC」事業の基幹設備として整備されます。|ユアテックが工事を担当し、7月1日に着工、2027年12月13日の完成を予定しています。契約金額は39億3800万円（税込み）です。|この変電所の完成後、高圧受電を特別高圧受電へ切り替え、将来的に受電容量50メガワット規模への拡張を視野に入れています。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="確定">確定</span>
-        </div>
-        <h3>環境フレンドリーＨＤ／苫小牧ＡＩＤＣ特高受変電設備建設工事／ユアテックに</h3>
-        <p class="lead">環境フレンドリーHDの子会社ATTは、苫小牧AIデータセンター向け特高受変電設備の建設工事契約をユアテックと39億3800万円（税込み）で締結。2027年12月13日の完成を予定しています。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>環境フレンドリーHDの子会社AI Tech Tomakomaiが、北海道苫小牧市で進める次世代AIデータセンター「苫小牧AIDC」事業の基幹設備として整備されます。</li><li>ユアテックが工事を担当し、7月1日に着工、2027年12月13日の完成を予定しています。契約金額は39億3800万円（税込み）です。</li><li>この変電所の完成後、高圧受電を特別高圧受電へ切り替え、将来的に受電容量50メガワット規模への拡張を視野に入れています。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#発注</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://www.decn.co.jp/?p=185412" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="除草・除雪機械に自動化の波、厳しい作業環境もロボットが維持管理"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00264/060200007/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="土木分野の維持管理業務において、除草や除雪にロボット活用が拡大しています。国交省関東地方整備局江戸川河川事務所は、担い手不足や劣悪な作業環境の課題解決に向け、自律走行型草刈りロボットの試験走行を公開。26年度には工法変更協議に対応予定です。"
-        data-clip-bullets="江戸川河川事務所は、DXプロジェクトの一環として、金杉建設と共同で自律走行型草刈り機の開発を進めています。|2026年5月には、傾斜約22度の堤防で高さ約50cmの草を2機で約6000m2を1時間足らずで刈り取る試験走行を実施しました。|同事務所は2026年度に、既発注の除草業務で自律走行型草刈りロボットを利用できるよう、工法変更の協議に対応する予定です。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="提言">提言</span>
-        </div>
-        <h3>除草・除雪機械に自動化の波、厳しい作業環境もロボットが維持管理</h3>
-        <p class="lead">土木分野の維持管理業務において、除草や除雪にロボット活用が拡大しています。国交省関東地方整備局江戸川河川事務所は、担い手不足や劣悪な作業環境の課題解決に向け、自律走行型草刈りロボットの試験走行を公開。26年度には工法変更協議に対応予定です。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>江戸川河川事務所は、DXプロジェクトの一環として、金杉建設と共同で自律走行型草刈り機の開発を進めています。</li><li>2026年5月には、傾斜約22度の堤防で高さ約50cmの草を2機で約6000m2を1時間足らずで刈り取る試験走行を実施しました。</li><li>同事務所は2026年度に、既発注の除草業務で自律走行型草刈りロボットを利用できるよう、工法変更の協議に対応する予定です。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#国交省</span><span class="tag">#地方整備局</span><span class="tag">#政策</span><span class="tag">#発注</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00264/060200007/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="フィジカルAIで建機の自動運転に関心、実用化目指すコマツの戦略"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/03639/060900006/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="コマツは2027年度に土木・砕石現場向けダンプトラックの自動運転システム実用化を目指しています。本記事では、同社の四家常務執行役員と協業するティアフォーの三好執行役員に戦略を聞いたようです。(本文未取得のため見出しとリードのみ)"
-        data-clip-bullets="コマツは2027年度を目標に、土木・砕石現場で用いるダンプトラックの自動運転システム実用化を計画しています。|フィジカルAIを活用した建機の自動運転に注力しており、協業パートナーであるティアフォーと共に実用化戦略を進めていると見られます。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="観測">観測</span>
-        </div>
-        <h3>フィジカルAIで建機の自動運転に関心、実用化目指すコマツの戦略</h3>
-        <p class="lead">コマツは2027年度に土木・砕石現場向けダンプトラックの自動運転システム実用化を目指しています。本記事では、同社の四家常務執行役員と協業するティアフォーの三好執行役員に戦略を聞いたようです。(本文未取得のため見出しとリードのみ)</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>コマツは2027年度を目標に、土木・砕石現場で用いるダンプトラックの自動運転システム実用化を計画しています。</li><li>フィジカルAIを活用した建機の自動運転に注力しており、協業パートナーであるティアフォーと共に実用化戦略を進めていると見られます。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#i-Construction</span><span class="tag">#自動運転</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/03639/060900006/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="B&#x27;s AI パトロール2（アイパト2）"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00008/061000569/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="B&#x27;s STYLEは、遠隔地から工事現場を監視するシステム「B&#x27;s AI パトロール2（アイパト2）」を発売しました。(本文未取得のため見出しとリードのみ)"
-        data-clip-bullets="B&#x27;s AI パトロール2は、遠隔地から工事現場の監視を可能にするシステムです。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="確定">確定</span>
-        </div>
-        <h3>B&#x27;s AI パトロール2（アイパト2）</h3>
-        <p class="lead">B&#x27;s STYLEは、遠隔地から工事現場を監視するシステム「B&#x27;s AI パトロール2（アイパト2）」を発売しました。(本文未取得のため見出しとリードのみ)</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>B&#x27;s AI パトロール2は、遠隔地から工事現場の監視を可能にするシステムです。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00008/061000569/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="ダンプトラックの大部分が自動運転に、「フィジカルAI」で急速に関心高まる"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00264/060200006/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="コマツはティアフォーと協業し、2027年度に土木・砕石現場向けダンプトラックの自動運転システム実用化を目指しています。本文が有料会員限定のため、詳細は不明ですが、この動きは「フィジカルAI」への関心を高めています。"
-        data-clip-bullets="コマツは2027年度までに土木・砕石現場向けダンプトラックの自動運転システムを実用化する計画です。|協業パートナーはティアフォーであり、両社の担当役員への戦略インタビューが掲載されています。|この技術開発は「フィジカルAI」という概念のもと、急速な関心を集めています。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="提言">提言</span>
-        </div>
-        <h3>ダンプトラックの大部分が自動運転に、「フィジカルAI」で急速に関心高まる</h3>
-        <p class="lead">コマツはティアフォーと協業し、2027年度に土木・砕石現場向けダンプトラックの自動運転システム実用化を目指しています。本文が有料会員限定のため、詳細は不明ですが、この動きは「フィジカルAI」への関心を高めています。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>コマツは2027年度までに土木・砕石現場向けダンプトラックの自動運転システムを実用化する計画です。</li><li>協業パートナーはティアフォーであり、両社の担当役員への戦略インタビューが掲載されています。</li><li>この技術開発は「フィジカルAI」という概念のもと、急速な関心を集めています。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span><span class="tag">#i-Construction</span><span class="tag">#自動運転</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00264/060200006/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="耐震工事で橋脚沈下、杭頭部撤去が影響か"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00005/061001028/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="堺市の平岡大橋で耐震工事中に橋脚が沈下しました。撤去された橋脚周りのコンクリートがH形鋼杭の頭部フーチングとして機能していたことが判明し、市は杭の存在を把握しておらず、その撤去が沈下に影響した可能性が指摘されています。(本文未取得のため見出しとリードのみ)"
-        data-clip-bullets="平岡大橋の耐震工事中に橋脚が沈下するトラブルが発生しました。|撤去された橋脚周りのコンクリートは、H形鋼杭の頭部に設けたフーチングの役割を果たしていたことが分かりました。|発注者である堺市はH形鋼杭の存在を事前に把握しておらず、コンクリートを洗掘防止用と考えていました。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="観測">観測</span>
-        </div>
-        <h3>耐震工事で橋脚沈下、杭頭部撤去が影響か</h3>
-        <p class="lead">堺市の平岡大橋で耐震工事中に橋脚が沈下しました。撤去された橋脚周りのコンクリートがH形鋼杭の頭部フーチングとして機能していたことが判明し、市は杭の存在を把握しておらず、その撤去が沈下に影響した可能性が指摘されています。(本文未取得のため見出しとリードのみ)</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>平岡大橋の耐震工事中に橋脚が沈下するトラブルが発生しました。</li><li>撤去された橋脚周りのコンクリートは、H形鋼杭の頭部に設けたフーチングの役割を果たしていたことが分かりました。</li><li>発注者である堺市はH形鋼杭の存在を事前に把握しておらず、コンクリートを洗掘防止用と考えていました。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#継続ウォッチ</span><span class="tag">#発注</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00005/061001028/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
-      <article
-        class="card news-clip"
-        data-clip-title="大成建設Gの次世代技術研究所、脱炭素など108の技術を集めたショールーム"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/column/18/03651/061700003/"
-        data-clip-section="技術・トレンド"
-        data-clip-date="2026-06-22"
-        data-clip-lead="大成建設グループの次世代技術研究所「T-FIELD／SATTE」は、インフレ基調の中、多額の投資を行い完成しました。この施設は通常の研究所とは一線を画すこだわりが満載で、脱炭素など108の次世代技術が集められています。"
-        data-clip-bullets="大成建設グループの次世代技術研究所「T-FIELD／SATTE」が竣工しました。|プロジェクト関係者からは、インフレ基調にもかかわらず「F1級」の投資額が投じられたと評されています。|脱炭素技術を含む108の次世代技術が集約されており、ショールームとしての機能も持ちます。"
-      >
-        <div class="kicker">
-          <span class="cat">Tech</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="観測">観測</span>
-        </div>
-        <h3>大成建設Gの次世代技術研究所、脱炭素など108の技術を集めたショールーム</h3>
-        <p class="lead">大成建設グループの次世代技術研究所「T-FIELD／SATTE」は、インフレ基調の中、多額の投資を行い完成しました。この施設は通常の研究所とは一線を画すこだわりが満載で、脱炭素など108の次世代技術が集められています。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>大成建設グループの次世代技術研究所「T-FIELD／SATTE」が竣工しました。</li><li>プロジェクト関係者からは、インフレ基調にもかかわらず「F1級」の投資額が投じられたと評されています。</li><li>脱炭素技術を含む108の次世代技術が集約されており、ショールームとしての機能も持ちます。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#DX</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/column/18/03651/061700003/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
     </section>
 
     <section class="sec" id="sec-cost" data-theme="pink">
@@ -1492,46 +1302,10 @@
           <span class="num">SEC.04</span>
           <h2>資材価格・コスト動向</h2>
         </div>
-        <span class="meta">Cost ／ 1 件</span>
+        <span class="meta">Cost ／ 0 件</span>
       </div>
 
-      <article
-        class="card news-clip"
-        data-clip-title="主要建設会社の84％が費用増、独自調査で分かった現場の熱中症対策"
-        data-clip-url="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00265/061200004/"
-        data-clip-section="資材価格・コスト"
-        data-clip-date="2026-06-22"
-        data-clip-lead="日経クロステックの調査で、主要建設会社の84％が2026年度の熱中症対策費を前年度より積み増すと回答しました。日よけ設備やスポットクーラーなどは既に現場の必須アイテムとなっていますが、労働日数や時間まで踏み込んだ対策が不可欠です。"
-        data-clip-bullets="主要建設会社19社中16社（84％）が、2026年度の熱中症対策費を前年度から「増える」と回答しました。|「水分・塩分の補給」「日よけ設備」「スポットクーラー」「ミスト装置」の4項目は、全19社が26年度に導入予定と回答しており、現場の必須アイテムとなっています。|全社としての導入は「水分・塩分の補給」以外の項目で半数に満たず、日よけ設備などは設置が現場条件に左右されるため、多くが現場判断に任されている現状です。"
-      >
-        <div class="kicker">
-          <span class="cat">Cost</span>
-          <span>·</span>
-          <span class="date">2026.06.22</span> <span class="badge-maturity" data-maturity="観測">観測</span>
-        </div>
-        <h3>主要建設会社の84％が費用増、独自調査で分かった現場の熱中症対策</h3>
-        <p class="lead">日経クロステックの調査で、主要建設会社の84％が2026年度の熱中症対策費を前年度より積み増すと回答しました。日よけ設備やスポットクーラーなどは既に現場の必須アイテムとなっていますが、労働日数や時間まで踏み込んだ対策が不可欠です。</p>
-        <details class="dive">
-          <summary>深掘り</summary>
-          <div class="body"><ul><li>主要建設会社19社中16社（84％）が、2026年度の熱中症対策費を前年度から「増える」と回答しました。</li><li>「水分・塩分の補給」「日よけ設備」「スポットクーラー」「ミスト装置」の4項目は、全19社が26年度に導入予定と回答しており、現場の必須アイテムとなっています。</li><li>全社としての導入は「水分・塩分の補給」以外の項目で半数に満たず、日よけ設備などは設置が現場条件に左右されるため、多くが現場判断に任されている現状です。</li></ul></div>
-        </details>
-        <div class="tags"><span class="tag">#人件費</span><span class="tag">#継続ウォッチ</span></div>
-        <div class="source-line">自動取得 ／ 2026-06-22</div>
-        <div class="actions">
-          <a href="https://xtech.nikkei.com/atcl/nxt/mag/ncr/18/00265/061200004/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            ソースを開く
-          </a>
-          <button type="button" class="btn btn-ghost js-copy-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            後追い用にコピー
-          </button>
-          <button type="button" class="btn btn-mail js-mail-clip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            深掘り予約
-          </button>
-        </div>
-      </article>
+      <p class="sec-empty">本日は該当記事がありません。</p>
     </section>
     <!-- DAILY-NEWS:SECTIONS:END -->
 
