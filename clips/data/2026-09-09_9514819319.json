@@ -1,0 +1,18 @@
+{
+  "title": "AIによるバックオフィス自動化ツール続々、ユーザーの受け入れ準備が急務に",
+  "url": "https://xtech.nikkei.com/atcl/nxt/column/18/03745/090800004/",
+  "section": "技術・トレンド",
+  "date": "2026-09-09",
+  "is_in_scope": false,
+  "maturity": "提言",
+  "lead": "AIエージェントによるバックオフィス業務の無人化が進展しており、Salesforce、SAP、Workdayなどの主要ベンダーが関連ツールの提供を強化しています。今後は技術的な課題よりも、ユーザー企業側のAI受け入れ体制の整備が重要になると指摘されています。",
+  "bullets": [
+    "米SalesforceはAIエージェント基盤「Agentforce」と米Anthropicの生成AI「Claude」の連携を強化し、SalesforceデータをClaudeで活用可能にしました。",
+    "独SAPはERPデータ活用による独自AIエージェント開発ツール「Joule」や「AI Foundation」を、米Workdayは対話型AI基盤を提供し、バックオフィス業務の効率化を推進しています。",
+    "AIエージェントをはじめとしたAI活用の道具立てが揃う中、技術面よりもユーザー企業がAIを受け入れるための準備が喫緊の課題とされています。"
+  ],
+  "tags": [
+    "#DX"
+  ],
+  "source_name": "自動取得"
+}
