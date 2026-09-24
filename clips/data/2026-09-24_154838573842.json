@@ -1,0 +1,21 @@
+{
+  "title": "圏外の建設現場にも携帯通信網、KDDIがスターリンク活用技術をNETIS登録",
+  "url": "https://xtech.nikkei.com/atcl/nxt/column/18/00142/02768/",
+  "section": "技術・トレンド",
+  "date": "2026-09-24",
+  "is_in_scope": true,
+  "maturity": "確定",
+  "lead": "KDDIは、衛星通信サービス「Starlink」を活用し、山間部などの携帯電話圏外の建設現場でも通信環境を構築するシステム「au Starlink Station」を国交省のNETISに登録しました。(本文未取得のため見出しとリードのみ)",
+  "bullets": [
+    "KDDIの「au Starlink Station」は、StarlinkとLTEを組み合わせ、Wi-Fiよりも電波到達距離が長い携帯電話の通信規格でネットワークを構築します。",
+    "本技術のNETIS登録は、スターリンクとLTEを組み合わせて通信エリアを構築する技術としては初めての事例です。",
+    "国土交通省のNETISに登録されたことで、今後の建設現場における採用や普及が期待されます。"
+  ],
+  "tags": [
+    "#DX",
+    "#i-Construction",
+    "#国交省",
+    "#継続ウォッチ"
+  ],
+  "source_name": "自動取得"
+}
